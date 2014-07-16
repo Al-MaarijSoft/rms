@@ -1,0 +1,24 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$Form = $this->Form;
+?>
+<div  id="pageMainDiv">
+    <fieldset>
+        <h3>
+            <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a></h3>
+        <div>
+            <?php
+            $Form->setAttribute('action', $this->url('country', array('action' => 'edit', 'controller' => 'Country', 'id' => $this->id)));
+            $Form->prepare();
+
+            echo $this->form()->openTag($Form);
+            echo $this->formHidden($Form->get('id'));
+            echo $this->formRow($Form->get('name'));
+            echo (isset($errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($errorMsgs['name']) . '</span>' : '';
+            echo $this->formSubmit($Form->get('submit'));
+            echo $this->form()->closeTag();
+            print_r($Form->getMessages());
+            ?>
+        </div>
+    </fieldset>
+</div>

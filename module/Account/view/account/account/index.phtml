@@ -1,0 +1,167 @@
+<link href="<?php echo $this->basePath('/css/jquery.treetable.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath('/css/jquery.treetable.theme.default.css') ?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath('/js/jquery.treetable.js') ?>"></script>
+<script src="<?php echo $this->basePath('/js/autocomplete-combo.js') ?>"></script>
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+$title = $this->translate('List Of Accounts');
+$this->headTitle($title);
+$counter = 0;
+?>
+
+<script type="text/javascript">
+    var urlAddAccount = "<?php echo $this->url('account', array('action' => 'add', 'controller' => 'Account')); ?>";
+    var urlPrintAccount = "<?php echo $this->url('account', array('action' => 'printPreview', 'controller' => 'Account')); ?>";
+    var urlEditAccount = "<?php echo $this->url('account', array('action' => 'edit', 'controller' => 'Account')); ?>";
+    var urlViewAccount = "<?php echo $this->url('account', array('action' => 'view', 'controller' => 'Account')); ?>";
+    var urlDeleteAccount = "<?php echo $this->url('account', array('action' => 'delete', 'controller' => 'Account')); ?>";
+</script>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->escapeHtml($title); ?>
+        <div id="msgTextDiv"></div>
+        <div><button id="printprviewbtn" onclick="javascript:loadPage(urlPrintAccount);" title="Print Account"></button></div>
+        <div><button id="addbtn" onclick="javascript:loadPage(urlAddAccount);" title="Add Account"></button></div>
+    </div>
+    <div style="clear: both"></div>
+    <?php
+    $Form = $this->Form;
+    $Form->setAttribute('action', $this->url('account', array('action' => 'index', 'controller' => 'Account')));
+    $Form->prepare();
+    echo $this->form()->openTag($Form);
+    echo $this->formHidden($Form->get('id'));
+    ?>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading">
+                    <legend>Search Panel</legend>
+                </a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('code'));
+                    echo $this->formRow($Form->get('name'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('parent'));
+                    echo $this->formRow($Form->get('level'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('class'));
+                    echo $this->formRow($Form->get('account_type'));
+                    ?>
+                </div>
+                <div>
+                    <label class="lblBtnContainer">
+                    <input type="button" onclick="refreshPage(urlAccount);" value="Refresh" />
+                        <?php echo $this->formSubmit($Form->get('submit')); ?>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <?php
+    echo $this->form()->closeTag();
+    ?>
+
+    <table id="tblAccountList" class="tableCss">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Parent Code</th>
+                <th>Parent Name</th>
+                <th>Level</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($this->Accounts as $Account) :
+                $counter++;
+                if ($counter % 2)
+                    $rowCss = 'oddRow';
+                else
+                    $rowCss = 'evenRow';
+                ?>
+                <tr class="<?php echo $rowCss; ?>" data-tt-id="<?php echo $Account->getId(); ?>" <?php echo (is_object($Account->getParentAccount()) ? 'data-tt-parent-id="' . $Account->getParentAccount()->getId() . '"' : ''); ?>>
+                    <td><?php echo $this->escapeHtml($Account->getCode()); ?></td>
+                    <td><?php echo $this->escapeHtml($Account->getName()); ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getCode() : 'NULL'); ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getName() : 'NULL'); ?></td>
+                    <td><?php echo $Account->getLevel(); ?></td>
+                    <td><?php echo ($Account->getStatus() ? 'Active' : 'Inactive'); ?></td>
+                    <td>
+                        <a href="javascript:loadPage(urlViewAccount+ '/<?php echo $Account->getId(); ?>');"><img src="<?php echo $this->basePath('/img/btn_view.png'); ?>" style="border: none;" border="0" title="View Record" /></a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:loadPage(urlEditAccount+ '/<?php echo $Account->getId(); ?>');"><img src="<?php echo $this->basePath('/img/btn_edit.png'); ?>" style="border: none;" border="0" title="Edit Record" /></a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:deleteRecord(urlDeleteAccount+ '/<?php echo $Account->getId(); ?>');"><img src="<?php echo $this->basePath('/img/delete.png'); ?>" style="border: none;" border="0" title="Delete Record" /></a>
+                    </td>
+                    <!--<td><a href="javascript:loadPage(urlEditAccount+ '/<?php // echo $this->escapeHtml($Account->getId());             ?>');">Edit</a></td>-->
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="7">&nbsp;</th>
+            </tr>    
+        </tfoot>
+    </table>
+</div>
+<script type="text/javascript">
+<?php if (isset($_REQUEST['submit']) && $_REQUEST['submit'] === 'Search'): ?>
+        //NO Table Tree during Search record
+<?php else: ?>
+        jQuery("#tblAccountList").treetable({expandable: true, initialState: "expanded"});
+<?php endif; ?>
+    jQuery(document).ready(function() {
+        jQuery("#accordion").accordion({
+            header: "h3",
+            autoheight: false,
+            active: 0,
+            alwaysOpen: false,
+            fillspace: false,
+            collapsible: true,
+            heightStyle: "content"
+                    //heightStyle: content   //auto, fill, content
+        });
+         //****** For account-code Account
+        jQuery(function() {
+            jQuery("[name='code']").combobox();
+            jQuery("#toggle").click(function() {
+                jQuery("[name='code']").toggle();
+            });
+        });
+         //****** For account-name Account
+        jQuery(function() {
+            jQuery("[name='name']").combobox();
+            jQuery("#toggle").click(function() {
+                jQuery("[name='name']").toggle();
+            });
+        });
+         //****** For account-parent Account
+        jQuery(function() {
+            jQuery("[name='parent']").combobox();
+            jQuery("#toggle").click(function() {
+                jQuery("[name='parent']").toggle();
+            });
+        });
+        //***************************Start Form Submit Event
+        jQuery('form').submit(function(event) {
+            event.preventDefault();
+            postSubmitData(urlAccount, 'accountSearch');
+        });
+        //**********End Form Submit Event
+        //Time Interval Functions
+        setInterval('hideMsgText()', 20000);
+    });
+</script>

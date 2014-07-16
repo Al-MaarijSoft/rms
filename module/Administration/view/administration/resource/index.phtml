@@ -1,0 +1,46 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<form name="Voucher" method="post" action="<?php $this->url('allocation', array('action' => 'allocate', 'controller' => 'Resource')); ?>">
+    <div id="pageMainDiv">
+        <fieldset>
+            <legend class="legendHeadingOfOtherIndexOfAccounts">Resources:</legend>
+            <table id="tblResourceList" class="tableCss">
+                <thead>
+                    <tr>
+                        <th>Allocate Resources</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $counter = 0;
+                    foreach ($this->Resources as $Resource)
+                    {
+                        $counter++;
+                        $counterSub = 0;
+                        if ($counter % 2)
+                            $rowCss = 'oddRow';
+                        else
+                            $rowCss = 'evenRow';
+                        ?>
+                        <tr class="<?php echo $rowCss; ?>" id="<?php echo $Resource->getId(); ?>" data-tt-id="<?php echo $Resource->getId(); ?>" <?php echo (is_object($Resource->getParent()) ? 'data-tt-parent-id="' . $Resource->getParent()->getId() . '"' : 'class="noParent' . $rowCss . '"'); ?>>
+                            <td><?php echo $this->escapeHtml(@$Resource->getName()); ?></td>
+                            <td><a href="javascript:loadPage(urlEditResources+ '/<?php echo @$Resource->getId(); ?>');">Edit Resources</a></td>
+                        </tr>
+                    <?php }; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2">&nbsp;</th>
+                    </tr>   
+                </tfoot>
+            </table>
+            <input type="submit" name="submit" value="Allocate">
+        </fieldset>
+    </div>
+</form>
+
+<script type="text/javascript">
+    jQuery("#tblResourceList").treetable({expandable: true, initialState: "expanded"});
+</script>

@@ -1,0 +1,55 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+
+$title = 'Add new Role';
+//$this->headTitle($title);
+?>
+<?php
+$Form = $this->Form;
+$Form->setAttribute('action', $this->url('role', array('action' => 'add', 'controller' => 'Role')));
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel"><?php echo $this->headTitle($title); ?></div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('name'));
+                    echo (isset($errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($errorMsgs['name']) . '</span>' : '';
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+    <div class="submit"> <?php echo $this->formSubmit($Form->get('submit')); ?></div>
+</div>
+</div>
+
+<?php
+echo $this->form()->closeTag();
+//                        print_r($Form->getMessages());
+?>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+        $("#accordion").accordion({
+            header: "h3",
+            autoheight: false,
+            active: 0,
+            alwaysOpen: false,
+            fillspace: false,
+            collapsible: true,
+            heightStyle: "content"
+                    //heightStyle: content   //auto, fill, content
+        });
+    });
+
+</script>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Sign-In</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="<?php echo $this->basePath('/assets/plugins/bootstrap3.1.1/css/bootstrap.css') ?>" rel="stylesheet">
+        <link href="<?php echo $this->basePath('/assets/css/theme2.css') ?>" rel="stylesheet">
+        <link href="<?php echo $this->basePath('/assets/css/style.css') ?>" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="<?php echo $this->basePath('/assets/js/html5.js') ?>//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="/bootstrap/img/favicon.ico">
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+        <style type="text/css">
+            .modal-footer {   border-top: 0px; }
+        </style>
+    </head>
+    <body>
+        <!--login modal-->
+        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content loginBox">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h1 class="text-center">Login</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <input type="text" class="has-error form-control input-lg" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+                                <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type='text/javascript' src="<?php echo $this->basePath('/assets/js/jquery.min.js') ?>"></script>
+        <script type='text/javascript' src="<?php echo $this->basePath('/assets/plugins/bootstrap3.1.1/js/bootstrap.js') ?>"></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+
+            });
+        </script>
+    </body>
+</html>

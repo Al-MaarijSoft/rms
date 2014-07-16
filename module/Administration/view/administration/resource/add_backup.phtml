@@ -1,0 +1,66 @@
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/manufacturing.module.js'); ?>
+<?php
+$title = 'Add New Inventory Stock';
+echo $this->headTitle($title);
+?>
+<form name="Voucher" method="post" action="<?php $this->url('stock', array('action' => 'add', 'controller' => 'Stock')); ?>">
+    <div id="pageMainDiv">
+        <fieldset>
+            <legend>Add Resource</legend>
+            <label>
+                <span>Controller:</span>
+                <input type="text" name="controller" autocomplete="off" value="<?php echo @$_POST['controller']; ?>"/>
+                <?php echo (isset($errorMsgs['controller'])) ? '<span class="errorMsgSpan">' . $errorMsgs['controller'] . '</span>' : '' ?>
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend class="legendHeadingOfOtherIndexOfAccounts">Add Actions:</legend>
+            <table class="editable" width="100%">
+                <thead>
+                    <tr>
+                        <th colspan="2" align="right" style="border-bottom: 1px solid lightgray;"><a href="#" title="Add New Row" style="" class="add-row">Add Row</a></th>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['action']))
+                    {
+                        foreach ($_POST['action'] as $index => $valueAction)
+                        {
+                            ?>
+                            <tr>
+                                <td class="colCredit">
+                                    <input type="text" id="action-<?php echo $index; ?>" name="action[]" value="<?php echo @$_POST['action'][$index] ?>" />
+                                </td>
+                            <?php }
+                            ?>
+                        </tr>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <tr>
+                            <td><input type="text" id="action-0" name="action[]" /></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <input type="submit" name="submit" value="Add">
+        </fieldset>
+    </div>
+</form>
+<script>
+//*******************************ADD Row
+    var counter = 0;
+    jQuery('a.add-row').click(function(event) {
+        event.preventDefault();
+        counter++;
+        var cols = new Array();
+        cols[0] = '<td><input type="text" id="action-' + counter + '" name="action[]' + '"></td>';
+        addNewRow(cols);
+    });
+</script>

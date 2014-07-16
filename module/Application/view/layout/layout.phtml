@@ -1,0 +1,88 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- Start Header -->
+        <?php echo $this->partial('partial/header.phtml', 'Application'); ?>
+        <!-- End Header -->
+    </head>
+    <body>
+        <noscript>
+        <div class="noScriptCss"><img src="<?php echo $this->basePath('/img/no_js_en.gif'); ?>" alt="Javascript not enabled" /></div>
+        </noscript>
+        <div id="loadingImgDiv" class="loadingDivCss"><img src="<?php echo $this->basePath('/img/loading.gif'); ?>" /></div>
+        <div id="alertBoxDiv">
+            <div id="alertBoxDivSub">
+                <a href="javascript:void(0);"><img src="<?php echo $this->basePath('/img/delete.png'); ?>" /></a>
+                <h1>Please enter your name.</h1>
+            </div>
+        </div>
+        <!-- Start Top-Nav Menu -->
+        <?php echo $this->partial('partial/topnav.phtml', 'Application'); ?>
+
+        <?php // echo $this->partial('partial/topnav.phtml', array('loginUserName'=>'$this->loginUserName')); ?>
+        <!-- End Top-Nav Menu -->
+        <div id="containerDiv" class="container">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <!-- Start Footer -->
+        <div class="footerContainer">
+            <hr style="border:3px solid #02355A;">
+            <footer>
+                <div style="height: 50px;background-color: #2b073e;">
+                    <p style="float: left; color: #478409; font-weight: bold;margin: 5px">&copy; 2005 - <?php echo date('Y') ?> By SECHEO PVT. LTD. <?php echo $this->translate('All rights reserved.') ?></p>
+                    <p style="float: right; color: #478409; font-weight: bold;margin: 5px"><?php echo $this->translate('Designed and Developed by Al-Ma\'arijSoft.') ?></p>
+                </div>
+            </footer>
+            <hr style="border:3px solid #02355A;">
+        </div>
+        <!-- End Footer -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+
+    <script>
+        $(".flexnav").flexNav({
+            'animationSpeed': 'slow'
+        });
+        //    jQuery('ul.flexnav').find('span.touch-button').text(function(_, value) {
+        //        return value == '▼' ? '►' : '▼'
+        //    });
+    </script>	
+    <script>
+        //    jQuery(function() {
+        //        jQuery("#nav").menu({position: {at: "left bottom"}});
+        //    });
+        //    jQuery(document).ready(function() {
+        //
+        //        jQuery('#nav li').hover(
+        //                function() {
+        //                    //show its submenu
+        //                    jQuery('ul', this).stop().slideDown(100);
+        //                },
+        //                function() {
+        //                    //hide its submenu
+        //                    jQuery('ul', this).stop().slideUp(100);
+        //                }
+        //        );
+        //
+        //    });
+        //    **********************************************
+        //****************************Set Ajax On navigation Links
+        jQuery('.flexnav a').click(function(event) {
+            event.preventDefault();
+            var url = jQuery(this).attr('href');
+//            alert(url);
+            if (url !== '#')
+                loadPage(url);
+        });
+        jQuery('#alertBoxDiv a').click(function(event) {
+            event.preventDefault();
+            myCloseAlert(event);
+        });
+        jQuery('input, select').change(function() {
+            jQuery(this).removeClass('fieldErrorFocus');
+        });
+
+    </script>
+</html>

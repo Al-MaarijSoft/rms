@@ -1,0 +1,75 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+
+$title = 'Add new Resource';
+//$this->headTitle($title);
+?>
+<?php
+$Form = $this->Form;
+$Form->setAttribute('action', $this->url('resource', array('action' => 'add', 'controller' => 'Resource')));
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel"><?php echo $this->headTitle($title); ?></div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('parent'));
+                    echo $this->formRow($Form->get('name'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('code'));
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+    <div class="submit"> <?php echo $this->formSubmit($Form->get('submit')); ?></div>
+</div>
+</div>
+
+<?php
+echo $this->form()->closeTag();
+//                        print_r($Form->getMessages());
+?>
+<script>
+    //
+    //    jQuery('input[name="name"]').change(function() {
+    //        if ((jQuery('select[name="parent"]'.val() == '') || jQuery('select[name="parent"]'.val() == '')) {
+    //            var length = $('select option').length;
+    //            jQuery('input[name="code"]').val('0' + length);
+    //
+    //        }
+    ////        jQuery('input[name="code"]').val('01');
+    ////    }
+    //    });
+    jQuery('select[name="parent"]').change(function() {
+        //*****Generate Code
+        var url = "<?php echo $this->url('resource', array('action' => 'generateResourceCode', 'controller' => 'Resource')) ?>";
+        url = url + '/' + jQuery('select[name="parent"]').val();
+        generateResourceCode(url);
+    });
+
+
+    jQuery(document).ready(function() {
+        $("#accordion").accordion({
+            header: "h3",
+            autoheight: false,
+            active: 0,
+            alwaysOpen: false,
+            fillspace: false,
+            collapsible: true,
+            heightStyle: "content"
+                    //heightStyle: content   //auto, fill, content
+        });
+    });
+</script>

@@ -1,0 +1,70 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$title = $this->translate('My Branch');
+$this->headTitle($title);
+$counter = 0;
+?>
+<script type="text/javascript">
+    var urlAddBranch = "<?php echo $this->url('branch', array('action' => 'add', 'controller' => 'Branch')); ?>";
+    var urlEditBranch = "<?php echo $this->url('branch', array('action' => 'edit', 'controller' => 'Branch')); ?>";
+</script>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->escapeHtml($title); ?>
+        <div><button id="printprviewbtn" onclick="javascript:loadPage(urlAddBranch);" title="Print WareHouse Location"></button></div>
+        <div><button id="addbtn" onclick="javascript:loadPage(urlAddBranch);" title="Add Warehouse Locatiob"></button></div>
+    </div>
+    <div style="clear: both"></div>
+    <table class="tableCss">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Actions</th>
+            </tr>
+        </thead><tbody>
+            <?php
+            if ($this->Paginator)
+            {
+                $count = 0;
+                foreach ($this->Paginator as $Branch)
+                {
+                    $counter++;
+                    if ($counter % 2)
+                        $rowCss = 'oddRow';
+                    else
+                        $rowCss = 'evenRow';
+                    ?>
+                    <tr class="<?php echo $rowCss; ?>">
+                        <td><?php echo $counter; ?></td>
+                        <td><?php echo $this->escapeHtml($Branch->getName()); ?></td>
+                        <td><?php echo $this->escapeHtml($Branch->getCompany()->getName()); ?></td>
+                        <td>
+                            <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Branch->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_view.png" style="border: none;" border="0" title="View Record" /></a>
+                            &nbsp;&nbsp;
+                            <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Branch->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_edit.png" style="border: none;" border="0" title="Edit Record" /></a>
+                            &nbsp;&nbsp;
+                            <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Branch->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/delete.png" style="border: none;" border="0" title="Delete Record" /></a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+            else
+            {
+                echo '<tr><td colspan="2">There is no record found.</td></tr>';
+            }
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4">&nbsp;</th>
+            </tr>    
+        </tfoot>
+    </table>
+
+    <div class="pagination">
+        <?php echo ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'administration/pager.phtml', array('url' => $this->url('administration'))) : ""; ?>
+    </div>
+</div>

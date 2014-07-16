@@ -1,0 +1,32 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- Start Header -->
+        <?php echo $this->partial('partial/header.phtml', 'Application'); ?>
+        <!-- End Header -->
+    </head>
+    <body>
+        <div id="loadingImgDiv" class="loadingDivCss"><img src="<?php echo $this->basePath('/img/loading.gif'); ?>" /></div>
+        <!-- Start Top-Nav Menu -->
+        <?php // echo $this->partial('partial/topnav.phtml', 'Application'); ?>
+        <!-- End Top-Nav Menu -->
+        <div id="containerDiv" class="container">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <!-- Start Footer -->
+        <div class="footerContainer">
+            <hr style="border:3px solid #02355A;">
+            <footer>
+                <div style="height: 50px;background-color: #2b073e;">
+                    <p style="float: left; color: #478409; font-weight: bold;margin: 5px">&copy; 2005 - <?php echo date('Y') ?> By SECHEO PVT. LTD. <?php echo $this->translate('All rights reserved.') ?></p>
+                    <p style="float: right; color: #478409; font-weight: bold;margin: 5px"><?php echo $this->translate('Designed and Developed by Al-Ma\'arijSoft.') ?></p>
+                </div>
+            </footer>
+            <hr style="border:3px solid #02355A;">
+        </div>
+        <!-- End Footer -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

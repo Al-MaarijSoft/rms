@@ -1,0 +1,144 @@
+<div class="topPanelContainer">
+    <div class="logoCss"><a href="javascript:loadPage(urlHome);"><img src="<?php echo $this->basePath() ?>/img/logo.png" /></a></div>
+    <div class="smallLinksContainer">
+        <div class="smallLinksData">Welcome, <?php echo $this->layout()->loginUserName; ?>!&nbsp;&nbsp;&nbsp;</div>
+        <div class="smallLinksData"><a href="javascript:logoutUser(urlLogout);">View Profile</a>&nbsp;|</div>
+        <div class="smallLinksData"><a href="javascript:logoutUser(urlLogout);">Change Password</a>&nbsp;|</div>
+        <div class="smallLinksData"><a href="javascript:logoutUser(urlLogout);">Logout</a>&nbsp;|</div>
+        <div class="smallLinksData"><font style="color: #2b073e;">Financial Year: </font><?php echo $this->layout()->currentFinancialYear; ?>&nbsp;</div>
+    </div>
+    <div class="navContainer">
+        <!--<ul class="nav" id="menu">-->
+        <div class="menu-button">Menu</div>
+        <ul class="flexnav" data-breakpoint="800">
+            <!--<ul id="menu">-->
+            <li><a href="javascript:loadPage(urlHome);"><?php echo $this->translate('Home') ?></a></li>
+            
+                <li>
+                    <a href="#"><?php echo $this->translate('Accounts') ?></a>
+                    <ul>
+                       
+                        <li>
+                            <a href="#"><?php echo $this->translate('Account Tools') ?></a>
+                            <ul>
+                                <li><a href="javascript:loadPage(urlAccount)"><?php echo $this->translate('List Of Accounts') ?></a></li>
+                                <li><a href="javascript:loadPage(urlAccountAdd)"><?php echo $this->translate('Add New a Account') ?></a></li>
+                                <li><a href="javascript:loadPage(urlAccountPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="#"><?php echo $this->translate('Voucher Tools') ?></a>
+                            <ul>
+                                <li><a href="javascript:loadPage(urlVoucher)"><?php echo $this->translate('List Of Vocuhers') ?></a></li>
+                                <li><a href="javascript:loadPage(urlVoucherAdd)"><?php echo $this->translate('Add New a Vocuher') ?></a></li>
+                                <li><a href="javascript:loadPage(urlVoucherPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><?php echo $this->translate('Financial Year Tools') ?></a>
+                            <ul>
+                                <li><a href="javascript:loadPage(urlFinancialYear)"><?php echo $this->translate('List Of Financial Year') ?></a></li>
+                                <li><a href="javascript:loadPage(urlFinancialYearAdd)"><?php echo $this->translate('Add New a Financial Year') ?></a></li>
+                                <li><a href="javascript:loadPage(urlFinancialYearPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:loadPage(urlOpeningBalance);"><?php echo $this->translate('Opening Balance') ?></a>
+                            <ul>
+                                <li><a href="javascript:loadPage(urlOpeningBalance)"><?php echo $this->translate('List Of Opening Balance') ?></a></li>
+                                <li><a href="javascript:loadPage(urlOpeningBalanceAdd)"><?php echo $this->translate('Add New Opening balance') ?></a></li>
+                                <li><a href="javascript:loadPage(urlOpeningBalancePrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            
+            <li>
+                <a href="#"><?php echo $this->translate('Member Billings') ?></a>
+                <ul>
+                    <li>
+                        <a href="#"><?php echo $this->translate('Plotting') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlAccount)"><?php echo $this->translate('List Of Plots') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAccountAdd)"><?php echo $this->translate('Add New a Plot') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAccountPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><?php echo $this->translate('Member Registration') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlAccount)"><?php echo $this->translate('List Of Members') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAccountAdd)"><?php echo $this->translate('Add New a Member') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAccountPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><?php echo $this->translate('Administration') ?></a>
+                <ul>
+                    <li>
+                        <a href="javascript:loadPage(urlCompany)"><?php echo $this->translate('Companies') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlCompany)"><?php echo $this->translate('List Of Companies') ?></a></li>
+                            <li><a href="javascript:loadPage(urlCompanyAdd)"><?php echo $this->translate('Add New Company') ?></a></li>
+                            <li><a href="javascript:loadPage(urlCompanyPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:loadPage(urlBranch)"><?php echo $this->translate('Branches') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlBranch)"><?php echo $this->translate('List Of Branches') ?></a></li>
+                            <li><a href="javascript:loadPage(urlBranchAdd)"><?php echo $this->translate('Add New Branche') ?></a></li>
+                            <li><a href="javascript:loadPage(urlBranchPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:loadPage(urlCountry)"><?php echo $this->translate('Country') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlCountry)"><?php echo $this->translate('List Of Countries') ?></a></li>
+                            <li><a href="javascript:loadPage(urlCountryAdd)"><?php echo $this->translate('Add New Country') ?></a></li>
+                            <li><a href="javascript:loadPage(urlCountryPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+
+
+                    </li>
+                    <li><a href="javascript:loadPage(urlRole)"><?php echo $this->translate('Roles') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlRole)"><?php echo $this->translate('List Of Roles') ?></a></li>
+                            <li><a href="javascript:loadPage(urlRoleAdd)"><?php echo $this->translate('Add New Role') ?></a></li>
+                            <li><a href="javascript:loadPage(urlRolePrint)"><?php echo $this->translate('Print Role') ?></a></li>
+                        </ul>
+
+
+                    </li>
+                    <li><a href="javascript:loadPage(urlUser)"><?php echo $this->translate('Users') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlUser)"><?php echo $this->translate('List Of Users') ?></a></li>
+                            <li><a href="javascript:loadPage(urlUserAdd)"><?php echo $this->translate('Add New User') ?></a></li>
+                            <li><a href="javascript:loadPage(urlUserPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+
+
+                    </li>
+                    <li><a href="javascript:loadPage(urlResource)"><?php echo $this->translate('Resources') ?></a>
+
+                        <ul>
+                            <li><a href="javascript:loadPage(urlResource)"><?php echo $this->translate('List Of Resources') ?></a></li>
+                            <li><a href="javascript:loadPage(urlResourceAdd)"><?php echo $this->translate('Add New Resource') ?></a></li>
+                            <li><a href="javascript:loadPage(urlResourcePrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+
+                    </li>
+                    <li><a href="javascript:loadPage(urlAllocation)"><?php echo $this->translate('Allocations') ?></a>
+                        <ul>
+                            <li><a href="javascript:loadPage(urlAllocation)"><?php echo $this->translate('List Of Allocations') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAllocationAdd)"><?php echo $this->translate('Add New Allocation') ?></a></li>
+                            <li><a href="javascript:loadPage(urlAllocationPrint)"><?php echo $this->translate('Print Preview') ?></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div><!--/.nav-collapse -->
+</div>

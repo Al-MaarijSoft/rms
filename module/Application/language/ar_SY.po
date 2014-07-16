@@ -1,0 +1,362 @@
+#
+# tawfek daghistani <tawfekov@gmail.com>, 2012.
+# Tawfek Daghistani <tawfekov@gmail.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-10 22:16+0500\n"
+"PO-Revision-Date: 2014-07-10 22:32+0500\n"
+"Last-Translator: Tawfek Daghistani <tawfekov@gmail.com>\n"
+"Language-Team: Arabic <>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.6.6\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/error/404.phtml:2
+msgid "A 404 error occurred"
+msgstr "حصل خطأ 404 , الصفحة غير موجودة"
+
+#: ../view/error/404.phtml:11
+msgid "The requested controller was unable to dispatch the request."
+msgstr "المتحكم المطلوب غير قادر على إجابة الطلب"
+
+#: ../view/error/404.phtml:14
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
+msgstr "لا يمكن ربط المتحكم المطلوب بأي من المتحكمات الموجودة حالياًَ"
+
+#: ../view/error/404.phtml:17
+msgid "The requested controller was not dispatchable."
+msgstr "المتحكم المطلوب غير قادر على الإجابة "
+
+#: ../view/error/404.phtml:20
+msgid "The requested URL could not be matched by routing."
+msgstr "الرابط المطلوب غير معرف لدى الموجه"
+
+#: ../view/error/404.phtml:23
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr "لا يمكنني التحديد لماذا حصل الخطأ 404 في هذا الوقت "
+
+#: ../view/error/404.phtml:35
+msgid "Controller"
+msgstr "المتحكم "
+
+#: ../view/error/404.phtml:42
+#, php-format
+msgid "resolves to %s"
+msgstr "يوصل إلى %s"
+
+#: ../view/error/404.phtml:54 ../view/error/index.phtml:8
+msgid "Additional information"
+msgstr "مزيد من المعلومات"
+
+#: ../view/error/404.phtml:57 ../view/error/404.phtml:81
+#: ../view/error/index.phtml:11 ../view/error/index.phtml:35
+msgid "File"
+msgstr "ملف"
+
+#: ../view/error/404.phtml:61 ../view/error/404.phtml:85
+#: ../view/error/index.phtml:15 ../view/error/index.phtml:39
+msgid "Message"
+msgstr "الرسالة"
+
+#: ../view/error/404.phtml:65 ../view/error/404.phtml:89
+#: ../view/error/index.phtml:19 ../view/error/index.phtml:43
+msgid "Stack trace"
+msgstr "تفاصيل الخطأ"
+
+#: ../view/error/404.phtml:75 ../view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr "الأخطاء السابقة"
+
+#: ../view/error/404.phtml:104 ../view/error/index.phtml:58
+msgid "No Exception available"
+msgstr "لايوجد خطأ"
+
+#: ../view/error/index.phtml:1
+msgid "An error occurred"
+msgstr "حصل خطأ ما "
+
+#: ../view/layout/layout.phtml:34 ../view/layout/print-preview-layout.phtml:23
+#: ../view/partial/pdf-footer.phtml:7
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة"
+
+#: ../view/layout/layout.phtml:35 ../view/layout/print-preview-layout.phtml:24
+#: ../view/partial/pdf-footer.phtml:8
+msgid "Designed and Developed by Al-Ma'arijSoft."
+msgstr ""
+
+#: ../view/partial/header.phtml:117
+msgid "Skeleton Application"
+msgstr "Skeleton Application"
+
+#: ../view/partial/topnav_backup2.phtml:15
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: ../view/partial/topnav_backup2.phtml:18
+msgid "Accounts"
+msgstr "اکائونٹس"
+
+#: ../view/partial/topnav_backup2.phtml:22
+msgid "Account Tools"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:24
+msgid "List Of Accounts"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:25
+msgid "Add New a Account"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:26
+#: ../view/partial/topnav_backup2.phtml:35
+#: ../view/partial/topnav_backup2.phtml:43
+#: ../view/partial/topnav_backup2.phtml:51
+#: ../view/partial/topnav_backup2.phtml:65
+#: ../view/partial/topnav_backup2.phtml:73
+#: ../view/partial/topnav_backup2.phtml:87
+#: ../view/partial/topnav_backup2.phtml:94
+#: ../view/partial/topnav_backup2.phtml:101
+#: ../view/partial/topnav_backup2.phtml:119
+#: ../view/partial/topnav_backup2.phtml:129
+#: ../view/partial/topnav_backup2.phtml:137
+msgid "Print Preview"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:31
+msgid "Voucher Tools"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:33
+msgid "List Of Vocuhers"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:34
+msgid "Add New a Vocuher"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:39
+msgid "Financial Year Tools"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:41
+msgid "List Of Financial Year"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:42
+msgid "Add New a Financial Year"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:47
+msgid "Opening Balance"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:49
+msgid "List Of Opening Balance"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:50
+msgid "Add New Opening balance"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:58
+msgid "Member Billings"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:61
+msgid "Plotting"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:63
+msgid "List Of Plots"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:64
+msgid "Add New a Plot"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:69
+msgid "Member Registration"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:71
+msgid "List Of Members"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:72
+msgid "Add New a Member"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:80
+#, fuzzy
+msgid "Administration"
+msgstr "مزيد من المعلومات"
+
+#: ../view/partial/topnav_backup2.phtml:83
+msgid "Companies"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:85
+msgid "List Of Companies"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:86
+msgid "Add New Company"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:90
+msgid "Branches"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:92
+msgid "List Of Branches"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:93
+msgid "Add New Branche"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:97
+msgid "Country"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:99
+msgid "List Of Countries"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:100
+msgid "Add New Country"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:106
+msgid "Roles"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:108
+msgid "List Of Roles"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:109
+msgid "Add New Role"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:110
+msgid "Print Role"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:115
+msgid "Users"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:117
+msgid "List Of Users"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:118
+msgid "Add New User"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:124
+msgid "Resources"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:127
+msgid "List Of Resources"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:128
+msgid "Add New Resource"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:133
+msgid "Allocations"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:135
+msgid "List Of Allocations"
+msgstr ""
+
+#: ../view/partial/topnav_backup2.phtml:136
+msgid "Add New Allocation"
+msgstr ""
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "أهلا بك في  %sZend Framework 2%s"
+
+#~ msgid ""
+#~ "Congratulations! You have successfully installed the %sZF2 Skeleton "
+#~ "Application%s. You are currently running Zend Framework version %s. This "
+#~ "skeleton can serve as a simple starting point for you to begin building "
+#~ "your application on ZF2."
+#~ msgstr ""
+#~ "تهانينا! لقد قمت بتنصيب %sZF2 Skeleton Application%s . أنت الآن تستخدم "
+#~ "مكتبة زيند الإصدار %s . هذا التطبيق يمكن أن يكون  لك نقطة بداية سهلة في "
+#~ "بناء برامجك الخاصة على مكتبة زيند "
+
+#~ msgid "Fork Zend Framework 2 on GitHub"
+#~ msgstr "اشتق مكتبة زيند على GitHub "
+
+#~ msgid "Follow Development"
+#~ msgstr "تابع أخر التطورات"
+
+#~ msgid ""
+#~ "Zend Framework 2 is under active development. If you are interested in "
+#~ "following the development of ZF2, there is a special ZF2 portal on the "
+#~ "official Zend Framework website which provides links to the ZF2 %swiki%s, "
+#~ "%sdev blog%s, %sissue tracker%s, and much more. This is a great resource "
+#~ "for staying up to date with the latest developments!"
+#~ msgstr ""
+#~ "مكتبة زيند تخضع للتطوير المستمر , إذا كان لديك الرغبة في متابعة "
+#~ "التطورات , بإمكانك تصفح الموقع الرسمي للمكتبة الذي يحتوي على روابط إلى  "
+#~ "%swiki%s, %sdev blog%s, %sissue tracker%s, ,و المزيد . هذه مصادر رائعة "
+#~ "لمتابعة أخر التطورات"
+
+#~ msgid "ZF2 Development Portal"
+#~ msgstr "بوابة التطوير الخاصة ب زيند"
+
+#~ msgid "Discover Modules"
+#~ msgstr "تعرف على الإضافات"
+
+#~ msgid ""
+#~ "The community is working on developing a community site to serve as a "
+#~ "repository and gallery for ZF2 modules. The project is available %son "
+#~ "GitHub%s. The site is currently live and currently contains a list of "
+#~ "some of the modules already available for ZF2."
+#~ msgstr ""
+#~ "المجتمع البرمجي يعمل على تطوير موقع خاص به ليكون كمصدر و معرض لإضافات "
+#~ "ZF2 . هذا المشروع موجود على %son GitHub%s . هذا الموقع يخضع للتطوير "
+#~ "المستمر و يحتوي على قائمة من الإضافات الخاصة ب ZF2 "
+
+#~ msgid "Explore ZF2 Modules"
+#~ msgstr "إكتشف إضافات ZF2 "
+
+#~ msgid "Help &amp; Support"
+#~ msgstr "الدعم و المساعدة "
+
+#~ msgid ""
+#~ "If you need any help or support while developing with ZF2, you may reach "
+#~ "us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+#~ "feedback you may have regarding the beta releases. Alternatively, you may "
+#~ "subscribe and post questions to the %smailing lists%s."
+#~ msgstr ""
+#~ "إذا كنت تريد الحصول على دعم فني أو مساعدة في تطوير ZF2 , بإمكانك التواصل "
+#~ "عبر IRC: %s#zftalk on Freenode%s. نحن نريد أن نسمع منك المزيد من "
+#~ "الأسئلة , الأراء و الملاحظات على النسخة التجربية من المكتبة , أو بإمكانك "
+#~ "الإشتراك و التفاعل أو وضع الأسئلة في القائمة البريدية %smailing lists%s."
+
+#~ msgid "Ping us on IRC"
+#~ msgstr "تواصل معنا في IRC"
+
+#~ msgid "Exception"
+#~ msgstr "خطأ برمجي"

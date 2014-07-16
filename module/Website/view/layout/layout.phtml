@@ -1,0 +1,149 @@
+
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- Start Header -->
+        <script type="text/javascript">
+            //********************** CONSTANTS
+
+
+        </script>
+        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/theme1.css')
+                ->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery-ui.css')
+                ->prependStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery.ui.datepicker.css')
+                ->prependStylesheet($this->basePath() . '/css/flexnav.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+//        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery-ui.css')
+//        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery.ui.datepicker.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath('/js/all.js'))
+                ->prependFile($this->basePath('/js/bootstrap.js'))
+                ->prependFile($this->basePath('/js/jquery.flexnav.js'))
+                ->prependFile($this->basePath('/js/jquery-ui.js'))
+                ->prependFile($this->basePath('/js/jquery.min.js'));
+        ?>
+        <!-- End Header -->
+    </head>
+    <body>
+        <noscript>
+        <div class="noScriptCss"><img src="<?php echo $this->basePath('/img/no_js_en.gif'); ?>" alt="Javascript not enabled" /></div>
+        </noscript>
+        <div id="loadingImgDiv" class="loadingDivCss"><img src="<?php echo $this->basePath('/img/loading.gif'); ?>" /></div>
+        <div id="alertBoxDiv">
+            <div id="alertBoxDivSub">
+                <a href="javascript:void(0);"><img src="<?php echo $this->basePath('/img/delete.png'); ?>" /></a>
+                <h1>Please enter your name.</h1>
+            </div>
+        </div>
+        <!-- ========================================= Start Top-Nav Menu and Top Container ====================================================== -->
+            <div class="navbar navbar-default navbar-static-top webTopContainer" role="navigation">
+                <div class="container">
+                    <div class="webLogoCss" >&nbsp;</div>
+                </div>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--<a class="navbar-brand" href="#">Project name</a>-->
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav ml50">
+                            <li class="active"><a href="#">HOME</a></li>
+                            <li><a href="#about">ABOUT US</a></li>
+                            <li>
+                                <a href="#contact">RMS FEATURES</a>
+                            </li>
+                            <li>
+                                <a href="#contact">CHECK A DEMO</a>
+                            </li>
+                            <li>
+                                <a href="#contact">CREATE NEW ACCOUNT</a>
+                            </li>
+<!--                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>-->
+<!--                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right mr50">
+<!--                            <li><a href="../navbar/">Default</a></li>
+                            <li><a href="../navbar-static-top/">Static top</a></li>
+                            <li class="active"><a href="./">Fixed top</a></li>-->
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONTACT US<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGN IN<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        <!-- ========================================= End Top-Nav Menu and Top Container ====================================================== -->
+        
+        <div id="containerDiv" class="container">
+            <?php echo $this->content; ?>
+        </div> 
+        <!-- /container -->
+        <!-- Start Footer -->
+        <div class="footerContainer">
+            <hr style="border:3px solid #02355A;">
+            <footer>
+                <div style="height: 50px;background-color: #2b073e;">
+                    <p style="float: left; color: #478409; font-weight: bold;margin: 5px">&copy; 2005 - <?php echo date('Y') ?> By SECHEO PVT. LTD. <?php echo $this->translate('All rights reserved.') ?></p>
+                    <p style="float: right; color: #478409; font-weight: bold;margin: 5px"><?php echo $this->translate('Designed and Developed by Al-Ma\'arijSoft.') ?></p>
+                </div>
+            </footer>
+            <hr style="border:3px solid #02355A;">
+        </div>
+        <!-- End Footer -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+
+    <script>
+        //****************************Set Ajax On navigation Links
+    </script>
+</html>

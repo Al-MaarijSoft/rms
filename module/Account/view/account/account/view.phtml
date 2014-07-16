@@ -1,0 +1,126 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+
+$title = 'Add new Account';
+//$this->headTitle($title);
+?>
+<?php
+$Form = $this->Form;
+$Form->setAttribute('action', "");
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->headTitle($title); ?>
+        <div>
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlAccount);" />
+            <!--<input type="submit" value="Save" />-->
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading">
+                    <legend><?php echo $this->escapeHtml($title); ?></legend>
+                </a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('category'));
+                    echo $this->formRow($Form->get('class'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('account_type'));
+                    echo $this->formRow($Form->get('branch'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('parent'));
+                    echo $this->formRow($Form->get('code'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('name'));
+                    echo $this->formRow($Form->get('status'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('description'));
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+        <div class="submit"> 
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlAccount);" />
+            <?php // echo $this->formSubmit($Form->get('submit')); ?>
+        </div>
+    </div>
+</div>
+
+<?php
+echo $this->form()->closeTag();
+?>
+<script type="text/javascript">
+
+                jQuery('select[name="category"]').change(function() {
+                    setAccountFormViewAccordingly();
+                    //*******load parent account.
+                    var url = "<?php echo $this->url('account', array('action' => 'populateParentAccount', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="class"]').val();
+                    SelectBoxNullValue = "Select Parent Account";
+                    populateSelectBox(url, 'class', 'parent');
+                    //*****Generate Code
+                    var url = "<?php echo $this->url('account', array('action' => 'generateAccountCode', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="parent"]').val() + '?category=' + jQuery('select[name="category"]').val();
+                    generateAccountCode(url);
+                });
+                jQuery('select[name="class"]').change(function() {
+                    //function that will load parent account.
+                    var url = "<?php echo $this->url('account', array('action' => 'populateParentAccount', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="class"]').val();
+                    SelectBoxNullValue = "Select Parent Account";
+                    populateSelectBox(url, 'class', 'parent');
+                    //*****Generate Code
+                    var url = "<?php echo $this->url('account', array('action' => 'generateAccountCode', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="parent"]').val() + '?category=' + jQuery('select[name="category"]').val();
+                    generateAccountCode(url);
+                });
+                jQuery('select[name="account_type"]').change(function() {
+                    //*****Generate Code
+                    var url = "<?php echo $this->url('account', array('action' => 'generateAccountCode', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="parent"]').val() + '?category=' + jQuery('select[name="category"]').val();
+                    generateAccountCode(url);
+                });
+                jQuery('select[name="parent"]').change(function() {
+                    //*****Generate Code
+                    var url = "<?php echo $this->url('account', array('action' => 'generateAccountCode', 'controller' => 'Account')) ?>";
+                    url = url + '/' + jQuery('select[name="parent"]').val() + '?category=' + jQuery('select[name="category"]').val();
+                    generateAccountCode(url);
+                });
+                jQuery(document).ready(function() {
+                    $("#accordion").accordion({
+                        header: "h3",
+                        autoheight: false,
+                        active: 0,
+                        alwaysOpen: false,
+                        fillspace: false,
+                        collapsible: true,
+                        heightStyle: "content"
+                                //heightStyle: content   //auto, fill, content
+                    });
+
+                    setAccountFormViewAccordingly();
+                });
+</script>
+
+

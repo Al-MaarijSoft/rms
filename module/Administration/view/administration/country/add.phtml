@@ -1,0 +1,49 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+
+$title = 'Add new Country';
+$this->headTitle($title);
+?>
+<div  id="pageMainDiv">
+    <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a></h3>
+                <div>
+                <?php
+                $Form = $this->Form;
+                $Form->setAttribute('action', $this->url('country', array('action' => 'add', 'controller' => 'Country')));
+                $Form->prepare();
+
+                echo $this->form()->openTag($Form);
+                echo $this->formHidden($Form->get('id'));
+                echo $this->formRow($Form->get('name'));
+                echo (isset($errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($errorMsgs['name']) . '</span>' : '';
+                echo $this->formSubmit($Form->get('submit'));
+                echo $this->form()->closeTag();
+                print_r($Form->getMessages());
+                ?>
+                </div>
+            </div>
+        </fieldset>
+    <div class="submit"> <?php echo $this->formSubmit($Form->get('submit')); ?></div>
+</div>
+</div>
+
+<?php
+echo $this->form()->closeTag();
+//                        print_r($Form->getMessages());
+?>
+    <script>
+        jQuery(document).ready(function() {
+            $("#accordion").accordion({
+                header: "h3",
+                autoheight: false,
+                active: 0,
+                alwaysOpen: false,
+                fillspace: false,
+                collapsible: true,
+                heightStyle: "content"
+                        //heightStyle: content   //auto, fill, content
+            });
+        });
+    </script>

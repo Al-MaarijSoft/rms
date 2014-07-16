@@ -1,0 +1,119 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+
+$title = 'Add new User';
+//$this->headTitle($title);
+$Form = $this->Form;
+$Form->setAttribute('action', $this->url('user', array('action' => 'edit', 'controller' => 'User', 'id' => $this->id)));
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->headTitle($title); ?>
+        <div>
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlUser);" />
+            <input type="submit" value="Save" />
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading">
+                    <legend><?php echo $this->escapeHtml($title); ?></legend>
+                </a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('role'));
+                    echo $this->formRow($Form->get('financial_years'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('username'));
+                    echo $this->formRow($Form->get('password'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('repeat_password'));
+                    echo $this->formRow($Form->get('name'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('country'));
+                    echo $this->formRow($Form->get('state'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('city'));
+                    echo $this->formRow($Form->get('zip_code'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('address'));
+                    echo $this->formRow($Form->get('email'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('cell'));
+                    echo $this->formRow($Form->get('phone1'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('phone2'));
+                    echo $this->formRow($Form->get('fax'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('status'));
+//                    echo $this->formRow($Form->get(''));
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+        <div class="submit"> 
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlUser);" />
+            <?php echo $this->formSubmit($Form->get('submit')); ?>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>
+<script type="text/javascript">
+                jQuery('select[name="country"]').change(function() {
+                    var url = "<?php echo $this->url('company', array('action' => 'populateState', 'controller' => 'Company')) ?>";
+                    url = url + '/' + jQuery('select[name="country"]').val();
+                    populateSelectBox(url, 'country', 'state');
+
+                });
+                jQuery('select[name="state"]').change(function() {
+                    var url = "<?php echo $this->url('company', array('action' => 'populateCity', 'controller' => 'Company')) ?>";
+                    url = url + '/' + jQuery('select[name="state"]').val();
+                    populateSelectBox(url, 'state', 'city');
+
+                });
+                jQuery(document).ready(function() {
+                    $("#accordion").accordion({
+                        header: "h3",
+                        autoheight: false,
+                        active: 0,
+                        alwaysOpen: false,
+                        fillspace: false,
+                        collapsible: true,
+                        heightStyle: "content"
+                                //heightStyle: content   //auto, fill, content
+                    });
+                });
+</script>

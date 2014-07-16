@@ -1,0 +1,497 @@
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js'); ?>
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/autocomplete-combo.js'); ?>
+
+<?php
+$title = $this->translate('Add New Voucher');
+$totalAmount = (isset($_POST['debit'][0]) && $_POST['debit'][0] > 0) ? ((float) @$_POST['debit'][0]) : ((float) @$_POST['credit'][0]);
+echo '<ul>';
+//var_dump($this->errorMsgs);
+if (count($this->errorMsgs)):
+    foreach ($this->errorMsgs as $key => $values):
+        if (is_array($values)):
+            foreach ($values as $v):
+                echo '<li>' . $v . '</li>';
+            endforeach;
+        else:
+            echo '<li>' . $values . '</li>';
+        endif;
+    endforeach;
+endif;
+echo '</ul>';
+?>
+<form id="frmVoucher" name="Voucher" method="post" action="<?php echo $this->url('voucher', array('action' => 'add', 'controller' => 'Voucher')); ?>">
+    <div id="pageMainDiv">
+        <div class="pageHeadingPanel"><?php echo $this->headTitle($title); ?>
+            <div>
+                <input type="button" value="Cancel" onclick="javascript:loadPage(urlVoucher);" />
+                <input type="submit" value="Save" />
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div id ="accordion">
+            <fieldset>
+                <h3>
+                    <a href="#" class="accordionAnchorHeading">
+                        <legend>Voucher Basic Info</legend>
+                    </a>
+                </h3>
+                <div>
+                    <div>
+                        <label>
+                            <span>Voucher Date:</span>
+                            <input type="text" name="voucher_date" autocomplete="off" value="<?php echo @$_POST['voucher_date'] ?>" />
+                            <?php echo (isset($this->errorMsgs['voucher_date'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['voucher_date']) . '</span>' : '' ?>
+                        </label>    
+                        <label>
+                            <span>Voucher Type:</span>
+                            <select name="voucher_type">
+                                <option value=""></option>
+                                <?php
+                                foreach ($voucherTypes as $key => $value)
+                                {
+                                    if (isset($_POST['voucher_type']) && $_POST['voucher_type'] == $key)
+                                        echo '<option value="' . $key . '" selected="selected">' . $value . '</option>';
+                                    else
+                                        echo '<option value="' . $key . '">' . $value . '</option>';
+                                }
+                                ?>
+                            </select>
+                            <?php echo (isset($this->errorMsgs['voucher_type'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['voucher_type']) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Voucher Behavior:</span>
+                            <label style = "display: inline;">
+                                <input type = "radio" name = "behavior" value = "<?php echo \Account\Entity\VoucherType::PAYMENT ?>" disabled="disabled" />
+                                PAYMENT
+                            </label>
+                            <label style = "display: inline;">
+                                <input type = "radio" name = "behavior" value = "<?php echo \Account\Entity\VoucherType::RECEIPT ?>" disabled="disabled" />
+                                RECEIPT
+                            </label>
+                            <label style = "display: inline;">
+                                <input type = "radio" name = "behavior" value = "<?php echo \Account\Entity\VoucherType::JOURNAL ?>" disabled="disabled" />
+                                JOURNAL
+                            </label>
+                            <label style = "display: inline;">
+                                <input type = "radio" name = "behavior" value = "<?php echo \Account\Entity\VoucherType::TRANSFER ?>" disabled="disabled" />
+                                Transfer
+                            </label>
+                        </label>
+                        <label>
+                            <span>Voucher Number:</span>
+                            <input type = "text" name = "voucher_number" autocomplete = "off" readonly = "readonly" value="<?php echo @$_POST['voucher_number'] ?>" />
+                            <?php echo (isset($this->errorMsgs['voucher_number'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['voucher_number']) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Voucher Currency:</span>
+                            <select id="currency" name = "currency">
+                                <option value = ""></option>
+                                <?php
+                                foreach ($currencies as $key => $value)
+                                {
+                                    if (isset($_POST['currency']) && $_POST['currency'] == $key)
+                                        echo '<option value="' . $key . '" selected="selected">' . $value . '</option>';
+                                    else
+                                        echo '<option value="' . $key . '">' . $value . '</option>';
+                                }
+                                ?>
+                            </select>
+                            <?php echo (isset($this->errorMsgs['currency'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['currency']) . '</span>' : '' ?>
+                        </label>
+                        <label>
+                            <span>Exchange Rate:</span>
+                            <input type="text" name="exchange_rate" autocomplete="off" value="<?php echo @$_POST['exchange_rate'] ?>" />
+                            <?php echo (isset($this->errorMsgs['exchange_rate'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['exchange_rate']) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="legendHeadingOfZeroIndexAccount">
+                <h3>
+                    <a href="#" class="accordionAnchorHeading">
+                        <legend>Account Info For Voucher Transaction</legend>
+                    </a>
+                </h3>
+                <div>
+                    <div>
+                        <label class="zeroIndexAccount">
+                            <span>Account:</span>
+                            <select id="account-0" name="account[]">
+                                <option value = ""></option>
+                                <?php
+                                if (isset($_POST['account']))
+                                {
+
+                                    foreach ($this->selectAccounts[0] as $key => $value)
+                                    {
+                                        if (isset($_POST['account'][0]) && $_POST['account'][0] == $key)
+                                            echo '<option value="' . $key . '" selected="selected">' . $value . '</option>';
+                                        else
+                                            echo '<option value="' . $key . '">' . $value . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <?php echo (isset($this->errorMsgs['account'][0])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['account'][0]) . '</span>' : '' ?>
+                        </label> 
+                        <label id="acc_debit" class="colDebit">
+                            <span>Debit:</span>
+                            <input type="text" id="debit-0" name="debit[]" readonly="readonly" value="<?php echo @$_POST['debit'][0] ?>" />
+                            <?php echo (isset($this->errorMsgs['debit'][0])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['debit'][0]) . '</span>' : '' ?>
+                        </label>
+                        <label id="acc_credit" class="colCredit">
+                            <span>Credit:</span>
+                            <input type="text" id="credit-0" name="credit[]" readonly="readonly" value="<?php echo @$_POST['credit'][0] ?>" />
+                            <?php echo (isset($this->errorMsgs['credit'][0])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['credit'][0]) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                    <div>
+                        <label id="acc_narration">
+                            <span>Narration:</span>
+                            <textarea  id="narration-0" name="narration[]"><?php echo @$_POST['narration'][0] ?></textarea>
+                        </label>
+                        <label class="forBank">
+                            <span>Cheque Date:</span>
+                            <input type="text" name="cheque_date" id="cheque_date" value="<?php echo @$_POST['cheque_date'] ?>" />
+                            <?php echo (isset($this->errorMsgs['cheque_date'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['cheque_date']) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="forBank">
+                            <span>Cheque Number:</span>
+                            <input type="text" name="cheque_number" id="cheque_number" value="<?php echo @$_POST['cheque_number'] ?>" />
+                            <?php echo (isset($this->errorMsgs['cheque_number'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['cheque_number']) . '</span>' : '' ?>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="legendHeadingOfOtherIndexOfAccounts">
+                <h3>
+                    <a href="#" class="accordionAnchorHeading">
+                        <legend>Voucher Transactions Detail:</legend>
+                    </a>
+                </h3>
+                <div>
+                    <table class="editable" width="100%">
+                        <thead>
+                            <tr class="actionRow">
+                                <th colspan="6" align="right" style="border-bottom: 1px solid lightgray;"><a href="#" title="Add New Row" style="" class="add-row">Add Row</a></th>
+                            </tr>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Account</th>
+                                <th>Narration</th>
+                                <th id="thDebit" class="colDebit">Debit</th>
+                                <th id="thDebit" class="colCredit">Credit</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($_POST['account']))
+                            {
+                                foreach ($_POST['account'] as $index => $value)
+                                {
+                                    if ($index > 0)
+                                    {
+                                        ?>
+                                        <tr id="tblRow-1" class="<?php echo (($index % 2) ? 'oddRow' : 'evenRow'); ?>">
+                                            <td class="smallTdForEditable"><?php echo $index; ?></td>
+                                            <td>
+                                                <?php echo (isset($this->errorMsgs['account'][$index])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['account'][$index]) . '</span>' : '' ?>
+                                                <select id="account-<?php echo $index; ?>" name="account[]">
+                                                    <option value=""></option>
+                                                    <?php
+                                                    foreach ($this->selectAccounts[$index] as $key => $value)
+                                                    {
+                                                        if (isset($_POST['account'][$index]) && $_POST['account'][$index] == $key)
+                                                            echo '<option value="' . $key . '" selected="selected">' . $value . '</option>';
+                                                        else
+                                                            echo '<option value="' . $key . '">' . $value . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                            <td><textarea type="text" id="narration-<?php echo $index; ?>" name="narration[]"><?php echo @$_POST['narration'][$index] ?></textarea></td>
+                                            <td class="colDebit">
+                                                <?php echo (isset($this->errorMsgs['debit'][$index])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['debit'][$index]) . '</span>' : '' ?>
+                                                <input type="text" id="debit-<?php echo $index; ?>" name="debit[]" value="<?php echo @$_POST['debit'][$index] ?>" />
+                                            </td>
+                                            <td class="colCredit">
+                                                <?php echo (isset($this->errorMsgs['credit'][$index])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['credit'][$index]) . '</span>' : '' ?>
+                                                <input type="text" id="credit-<?php echo $index; ?>" name="credit[]" value="<?php echo $this->escapeHtml(@$_POST['credit'][$index]); ?>" />
+                                            </td>
+                                            <td class="smallTdForEditable"><a class="deleteRowLink" href="javascript:removeRow('tblRow-1');startRestingAfterDeleteRow();" title="Delete Row"><img src="<?php echo $this->basePath(); ?>/img/delete.png" /></a></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <tr id="tblRow-1" class="oddRow">
+                                    <td class="smallTdForEditable">1</td>
+                                    <td>
+                                        <select id="account-1" name="account[]">
+                                            <option value=""></option>
+                                        </select>
+                                    </td>
+                                    <td><textarea type="text" id="narration-1" name="narration[]"></textarea></td>
+                                    <td class="colDebit"><input accesskey="F" type="text" id="debit-1" name="debit[]" /></td>
+                                    <td class="colCredit"><input type="text" id="credit-1" name="credit[]" /></td>
+                                    <td class="smallTdForEditable"><a class="deleteRowLink" href="javascript:removeRow('tblRow-1');startRestingAfterDeleteRow();" title="Delete Row"><img src="<?php echo $this->basePath(); ?>/img/delete.png" /></a></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                        <tfoot>
+                            <tr class="tblFooterTd">
+                                <td style="visibility: hidden;"> 1 </td>
+                                <td style="visibility: hidden;"><input type="text" /></td>
+                                <td style="visibility: visible;"><input type="text" value="Total: " style="box-shadow: none; text-align: right; border: none; background-color: #fff; color: #000;" /></td>
+                                <td><input type="text" id="totalAmount" name="totalAmount" style="text-align: right;" readonly="readonly" /></td>
+                                <td><input type="text" id="totalAmount2" name="totalAmount2" style="text-align: right;" readonly="readonly" value="0" /></td>
+                                <td style="visibility: hidden;"><a class="deleteRowLink"><img src="<?php echo $this->basePath(); ?>/img/delete.png" /></a></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </fieldset>
+            <div class="submit">
+                <input type="button" value="Cancel" onclick="javascript:loadPage(urlVoucher);" />
+                <input type="submit" id="submit" name="submit" value="Save"  />
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+                    gridRowNumber = <?php echo isset($_POST['account']) ? count($_POST['account']) - 1 : 1; ?>;
+                    initialValForTotalAmount = <?php echo $totalAmount; ?>
+                    //****** On Load
+                    jQuery(document).ready(function() {
+                        //        jQuery("[title]").tooltip();
+                        jsonSTR = '<?php echo (isset($this->selectAccounts[1]) ? json_encode($this->selectAccounts[1]) : "{}"); ?>';
+                        gridAccountsJsonStr = jQuery.parseJSON(jsonSTR);
+                        //*************************Start Accordion
+                        $("#accordion").accordion({
+                            header: "h3",
+                            autoheight: false,
+                            active: 0,
+                            alwaysOpen: false,
+                            fillspace: false,
+                            collapsible: true,
+                            heightStyle: "content"
+                                    //heightStyle: content   //auto, fill, content
+                        });
+                        //*************************End Accordion
+                        //*************************For Autocomplete
+                        //****** For ZeroIndex Account
+                        jQuery(function() {
+                            jQuery("#account-0").combobox();
+                            jQuery("#toggle").click(function() {
+                                jQuery("#account-0").toggle();
+                            });
+                        });
+                        //****** For OneIndex Account
+                        jQuery(function() {
+                            jQuery("#account-1").combobox();
+                            jQuery("#toggle").click(function() {
+                                jQuery("#account-1").toggle();
+                            });
+                        });
+                        //*************************End For Autocomplete
+
+                        jQuery('fieldset table thead tr.actionRow').hide();
+                        //*****Start For DatePicker
+                        jQuery('input[name="voucher_date"]').datepicker(dateFormater);
+                        jQuery('input[name="cheque_date"]').datepicker(dateFormater);
+                        //*****End For DatePicker
+                        setVoucherFormAccordingToVrType(gridRowNumber);
+                        //*******************Start Getting Only For Decimal
+                        jQuery('#debit-1').keydown(function(event) {
+                            getOnlyDecimalValue(event, jQuery(this).val());
+                            //========For JV Voucher
+                            var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                            if (voucherType === JOURNAL_VOUCHER)
+                                jQuery('#credit-1').val(0);
+                        });
+                        jQuery('#credit-1').keydown(function(event) {
+                            getOnlyDecimalValue(event, jQuery(this).val());
+                            //========For JV Voucher
+                            var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                            if (voucherType === JOURNAL_VOUCHER)
+                                jQuery('#debit-1').val(0);
+                        });
+                        //*******************End Getting Only For Decimal
+
+                        //*******************Start Calculate Total Amount
+                        jQuery('#debit-1').change(function() {
+                            getTotalAmountOfDebitOrCredit();
+                            //========For JV Voucher
+                            var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                            if (voucherType === JOURNAL_VOUCHER)
+                                jQuery('#credit-1').val(0);
+                        });
+                        jQuery('#credit-1').change(function() {
+                            getTotalAmountOfDebitOrCredit();
+                            //========For JV Voucher
+                            var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                            if (voucherType === JOURNAL_VOUCHER)
+                                jQuery('#debit-1').val(0);
+                        });
+                        //*******************End Calculate Total Amount
+
+//**********************************************************Code For More Than One Indexs 
+<?php
+if (isset($_POST['account'])):
+    foreach ($_POST['account'] as $index => $value):
+        if ($index > 1):
+            ?>
+                                    //****** For More than OneIndex Account
+                                    jQuery(function() {
+                                        jQuery("#account-<?php echo $index ?>").combobox();
+                                        jQuery("#toggle").click(function() {
+                                            jQuery("#account-<?php echo $index ?>").toggle();
+                                        });
+                                    });
+                                    //********************Start Getting Only For Decimal
+                                    jQuery('#debit-<?php echo $index ?>').keydown(function(event) {
+                                        getOnlyDecimalValue(event, jQuery(this).val());
+                                        //========For JV Voucher
+                                        var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                        if (voucherType === JOURNAL_VOUCHER)
+                                            jQuery('#credit-<?php echo $index ?>').val(0);
+                                    });
+                                    jQuery('#credit-<?php echo $index ?>').keydown(function(event) {
+                                        getOnlyDecimalValue(event, jQuery(this).val());
+                                        //========For JV Voucher
+                                        var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                        if (voucherType === JOURNAL_VOUCHER)
+                                            jQuery('#debit-<?php echo $index ?>').val(0);
+                                    });
+                                    //********************End Getting Only For Decimal
+                                    //*******************Start Calculate Total Amount
+                                    jQuery('#debit-<?php echo $index ?>').change(function() {
+                                        getTotalAmountOfDebitOrCredit();
+                                        //========For JV Voucher
+                                        var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                        if (voucherType === JOURNAL_VOUCHER)
+                                            jQuery('#credit-<?php echo $index ?>').val(0);
+                                    });
+                                    jQuery('#credit-<?php echo $index ?>').change(function() {
+                                        getTotalAmountOfDebitOrCredit();
+                                        //========For JV Voucher
+                                        var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                        if (voucherType === JOURNAL_VOUCHER)
+                                            jQuery('#debit-<?php echo $index ?>').val(0);
+                                    });
+                                    //*******************End Calculate Total Amount
+            <?php
+        endif;
+    endforeach;
+endif;
+?>
+                        //***************************Start Form Submit Event
+                        jQuery('form').submit(function(event) {
+                            event.preventDefault();
+                            if (validateVoucherForm())
+                            {
+                                postSubmitData(urlVoucherAdd, 'frmVoucher');
+                            }
+                        });
+                        //**********End Form Submit Event
+
+                    }); //End Document Ready
+                    //****** On-Change Of Element [name=voucher_type]
+                    jQuery('select[name="voucher_type"]').change(function() {
+                        if (jQuery(this).val() !== "")
+                        {
+                            var url = "<?php echo $this->url('voucher', array('action' => 'generateVocuherNo', 'controller' => 'Voucher')) ?>";
+                            var voucherType = jQuery('select[name="voucher_type"]').val();
+                            getVocuherNo(url, voucherType);
+                            //**** Element ON/Off Accordingly
+                            setVoucherFormAccordingToVrType(gridRowNumber);
+                            //*********** Populated Zero Account
+                            var url = "<?php echo $this->url('voucher', array('action' => 'populateAccountSelectBoxes', 'controller' => 'Voucher')) ?>";
+                            url = url + '/' + jQuery('select[name="voucher_type"]').val();
+                            populateZeroIndexAccountAndGlobalVarForSBGrid(url, 'voucher_type', 'account-0');
+                        }
+                    });
+
+                    //****** On-Change Of Element [Currency]
+                    jQuery('#currency').change(function() {
+                        if (jQuery(this).val() !== "")
+                        {
+                            var url = "<?php echo $this->url('voucher', array('action' => 'getExchangeRate', 'controller' => 'Voucher')) ?>";
+                            var currencyVal = jQuery(this).val();
+                            getExchangeRate(url, currencyVal);
+                        }
+                    });
+
+                    //*******************************ADD New Row
+                    var counter = 0;
+                    jQuery('a.add-row').click(function(event) {
+                        event.preventDefault();
+                        var voucherBehavior = jQuery('[name="voucher_type"]').val();
+                        if (voucherBehavior !== "") {
+                            gridRowNumber++;
+                            counter = gridRowNumber;
+                            var debitOrCreditCol = getDebitOrCreditColForAddRow(counter);
+                            var cols = new Array();
+                            cols[0] = '<td class="smallTdForEditable">' + counter + '</td>';
+                            cols[1] = '<td><select id="account-' + counter + '" name="account[]' + '"/></select></td>';
+                            cols[2] = '<td><textarea id="narration-' + counter + '"name="narration[]' + '"/></td>';
+                            cols[3] = debitOrCreditCol;
+                            cols[4] = '<td class="smallTdForEditable"><a class="deleteRowLink" href="javascript:removeRow(\'tblRow-' + counter + '\');startRestingAfterDeleteRow();" title="Delete Row"><img src="<?php echo $this->basePath(); ?>/img/delete.png" /></a></td>';
+                            addNewRow(cols);
+                            appendOptionsInSelectBox("account-" + counter, gridAccountsJsonStr);
+
+                            //********************Start Getting Only For Decimal
+                            jQuery('#debit-' + counter).keydown(function(event) {
+                                getOnlyDecimalValue(event, jQuery(this).val());
+                                //========For JV Voucher
+                                var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                if (voucherType === JOURNAL_VOUCHER)
+                                    jQuery('#credit-' + counter).val(0);
+                            });
+                            jQuery('#credit-' + counter).keydown(function(event) {
+                                getOnlyDecimalValue(event, jQuery(this).val());
+                                //========For JV Voucher
+                                var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                if (voucherType === JOURNAL_VOUCHER)
+                                    jQuery('#debit-' + counter).val(0);
+                            });
+                            //********************End Getting Only For Decimal
+                            //*******************Start Calculate Total Amount
+                            jQuery('#debit-' + counter).change(function() {
+                                getTotalAmountOfDebitOrCredit();
+                                //========For JV Voucher
+                                var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                if (voucherType === JOURNAL_VOUCHER)
+                                    jQuery('#credit-' + counter).val(0);
+                            });
+                            jQuery('#credit-' + counter).change(function() {
+                                getTotalAmountOfDebitOrCredit();
+                                //========For JV Voucher
+                                var voucherType = parseInt(jQuery('select[name="voucher_type"]').val());
+                                if (voucherType === JOURNAL_VOUCHER)
+                                    jQuery('#debit-' + counter).val(0);
+
+                            });
+                            //*******************End Calculate Total Amount
+                            //*************************For Autocomplete
+                            jQuery(function() {
+                                jQuery("#account-" + counter).combobox();
+                                jQuery("#toggle").click(function() {
+                                    jQuery("#account-" + counter).toggle();
+                                });
+                            });
+                            //*************************End For Autocomplete       
+
+                        }
+                    });
+</script>

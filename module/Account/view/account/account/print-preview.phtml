@@ -1,0 +1,76 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+
+$title = $this->translate('Accounts');
+$this->headTitle($title);
+$counter = 0;
+//echo $this->partial('partial/header.phtml', 'Application'); 
+?>
+
+<script type="text/javascript">
+    var urlCreatePdf = "<?php echo $this->url('account', array('action' => 'pdfReport', 'controller' => 'Account')); ?>";
+    var urlCreateExcel = "<?php echo $this->url('account', array('action' => 'excelReport', 'controller' => 'Account')); ?>";
+    var urlBackAccount = "<?php echo $this->url('account', array('action' => 'index', 'controller' => 'Account')); ?>";
+
+</script>
+
+<div id="pageMainDiv">
+
+    <p align ="center">
+        <button  class="printMe">Print Report</button>
+        <button class="no-print" onclick="javascript:loadPage(urlCreatePdf);">Pdf Report</button>
+        <button class="no-print" onclick="javascript:loadPage(urlCreateExcel);">Excel Report</button>
+        <button class="no-print" onclick="javascript:loadPage(urlBackAccount);">Back</button>
+    </p>
+    <br/>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <table id="tblAccountList" class="tableCss">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Parent Code</th>
+                <th>Total</th>
+                <th>Parent Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($this->Accounts as $Account) :
+                $counter++;
+                $counterSub = 0;
+                if ($counter % 2)
+                    $rowCss = 'oddRow';
+                else
+                    $rowCss = 'evenRow';
+                ?>
+                <tr class="<?php echo $rowCss; ?>" data-tt-id="<?php echo $Account->getId(); ?>" <?php echo (is_object($Account->getParentAccount()) ? 'data-tt-parent-id="' . $Account->getParentAccount()->getId() . '"' : ''); ?>>
+                    <td><?php echo $this->escapeHtml($Account->getCode()); ?></td>
+                    <td><?php echo $this->escapeHtml($Account->getName()); ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getCode() : 'NULL'); ?></td>
+                    <td><?php echo 'NULL'; ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getName() : 'NULL'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="5">&nbsp;</th>
+            </tr>    
+        </tfoot>
+    </table>
+</div>
+<script type="text/javascript">
+    jQuery("#tblAccountList").treetable({expandable: false});
+
+
+    jQuery(document).ready(function() {
+        jQuery('.printMe').click(function() {
+            window.print();
+            return false;
+        });
+    });
+</script>

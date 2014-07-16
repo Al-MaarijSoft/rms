@@ -1,0 +1,1094 @@
+<style>
+body {
+    /*    padding-top: 60px;
+        padding-bottom: 40px;*/
+    font-size: 12px;
+    font-weight: bold;
+    font-family: arial;
+}
+.loadingDivCss{
+    padding-top:200px;
+    text-align: center; 
+    vertical-align: 50%;
+    position: absolute; 
+    width: 100%; 
+    /*height: 100%;*/ 
+    /*    background-color: #666; */
+    z-index: 11000;
+    /*    opacity: .5*/
+    display: none;
+}
+img{
+    border: none;
+}
+h1{
+    font-size: 18px;
+    margin:  0 0 10px 10px;
+}
+/*button{
+    height: 30px;
+    line-height: 30px;
+    background-color: #478409;
+    color: #fff;
+    border: 0px solid #12AFA8;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+}
+button:hover{
+    color: #000;
+}*/
+/*input[type="submit"]{
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #000;
+    color: #ffffff;
+    border: 1px solid #000000;
+    font-size: 11px;
+    font-weight: bold;
+}
+input[type="submit"]:hover{
+    color: #DF9B0A;
+}*/
+input[type="submit"],button,input[type="button"]{
+    /*background-image: url(../img/btn_aro.png);*/
+    /*background-repeat: no-repeat;*/
+    /*background-position:  left center;*/
+    /*width: 100px;*/
+    height: 30px;
+    line-height: 30px;
+    background-color: #478409;
+    color: #fff;
+    border: 0px solid #12AFA8;
+    border-radius: 3px 3px 3px 3px;
+    /*font-size: 16px;*/
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+}
+input[type="submit"]:hover{
+    color: #000;
+}
+
+
+button#addbtn{
+    background-image: url(../img/btn_add.png);
+    background-repeat: none;
+    height: 34px !important;
+    width: 34px !important;
+    cursor: pointer !important;
+    background-color: transparent !important;
+    line-height:none !important;
+    color: none !important;
+    border: 0px solid #000000 !important;
+    font-size: none !important;
+    font-weight: none !important;
+
+}
+button#printprviewbtn{
+    background-image: url(../img/btn_printview.png);
+    background-repeat: none;
+    height: 37px !important;
+    width: 37px !important;
+    cursor: pointer !important;
+    background-color: transparent !important;
+    line-height:none !important;
+    color: none !important;
+    border: 0px solid #000000 !important;
+    font-size: none !important;
+    font-weight: none !important;
+
+}
+button#pdfBtn{
+    background-image: url(../img/btn_pdf_small.png);
+    background-repeat: none;
+    height: 34px !important;
+    width: 27px !important;
+    cursor: pointer !important;
+    background-color: transparent !important;
+    line-height:none !important;
+    color: none !important;
+    border: 0px solid #000000 !important;
+    font-size: none !important;
+    font-weight: none !important;
+
+}
+button#excelBtn{
+    background-image: url(../img/btn_excel.png);
+    background-repeat: none;
+    height: 34px !important;
+    width: 27px !important;
+    cursor: pointer !important;
+    background-color: transparent !important;
+    line-height:none !important;
+    color: none !important;
+    border: 0px solid #000000 !important;
+    font-size: none !important;
+    font-weight: none !important;
+
+}
+.container{
+    margin: auto;
+    width: auto;
+    padding: 0px;
+}
+div.topPanelContainer{
+    border-top: 5px solid #F95507;  
+    height: 37.9px;
+    padding: 25px 0 1px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+}
+div.printViewPageTopPanelContainer {
+    background-color: #FFFFFF;
+    /*border-top: 5px solid #F95507;*/
+    /*height: 37.9px;*/
+    height: 54px;
+    padding: 5px 0 1px 5px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+}
+div.printViewPageTopPanelContainer title {
+    display: block;
+    /*float: left;*/
+    width: auto;
+}
+.printViewLogoCss{
+    float: left;
+    position: relative;
+    /*top: -11px;*/
+}
+.printViewHeading{
+    color: #478409;
+    font-size: 18px;
+    position: relative;
+    text-align: center;
+    /*top: -13px;*/
+    width: 100%;
+    margin: 0 0 0 -18%;
+}
+.printViewTopHeadDataRightSide{
+    float: right;
+    position: relative;
+    /*top: -11px;*/
+    right: 10px;
+    color: #478409;
+    font-size: 13px;
+}
+.logoCss{
+    float: left;
+    height: 57px;
+    /*width: 137px;*/
+    width: auto;
+    position: relative; 
+    top: -20px;
+    /*margin: 0 40px 0 0;*/
+    margin: 0 -75px 0 0;
+}
+.smallLinksContainer{
+    margin: 0 0 0 55%;
+    height: 5px;
+}
+.smallLinksData{
+    /*float: right;*/
+    width: auto;
+    position: relative; 
+    top: -20px;
+    margin: 0 5px 0 0;
+    color: #478409;
+    display: inline-block;
+}
+.smallLinksData a{
+    color: #F95507;
+    text-decoration: none;
+}
+
+div#pageMainDiv{
+    margin: 0 0 50px 0;
+}
+div#printViewPageMainDiv {
+    margin: 0 0 50px;
+    position: relative;
+    top: -57px;
+}
+div#pageMainDiv p{
+    margin: 0 0 5px 0;
+}
+.container{
+    margin: auto;
+    width: auto;
+    padding: 0px;
+    position: relative;
+    top: 119px;
+}
+.container{
+    margin: auto;
+    width: auto;
+    padding: 0px;
+    position: relative;
+    top: 123px;
+    /*top: 62px;*/
+}
+.footerContainer{
+    margin: auto;
+    width: auto;
+    padding: 0px;
+    position: relative;
+    top: 123px;
+    /*top: 62px;*/ 
+}
+div.navContainer{
+    width: 100%;
+    margin:0; 
+    padding:0; 
+    /*background-color: #4F4F4F;*/
+    background-color: #2b073e;
+    height: 39px;
+}
+/*============================================================================================================================*/
+.pagination ul{display:inline-block;*display:inline;margin-bottom:0;margin-left:0;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;*zoom:1;-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.05);-moz-box-shadow:0 1px 2px rgba(0,0,0,0.05);box-shadow:0 1px 2px rgba(0,0,0,0.05)}.pagination ul>li{display:inline}.pagination ul>li>a,.pagination ul>li>span{float:left;padding:4px 12px;line-height:20px;text-decoration:none;background-color:#fff;border:1px solid #ddd;border-left-width:0}.pagination ul>li>a:hover,.pagination ul>.active>a,.pagination ul>.active>span{background-color:#f5f5f5}.pagination ul>.active>a,.pagination ul>.active>span{color:#999;cursor:default}.pagination ul>.disabled>span,.pagination ul>.disabled>a,.pagination ul>.disabled>a:hover{color:#999;cursor:default;background-color:transparent}.pagination ul>li:first-child>a,.pagination ul>li:first-child>span{border-left-width:1px;-webkit-border-bottom-left-radius:4px;border-bottom-left-radius:4px;-webkit-border-top-left-radius:4px;border-top-left-radius:4px;-moz-border-radius-bottomleft:4px;-moz-border-radius-topleft:4px}.pagination ul>li:last-child>a,.pagination ul>li:last-child>span{-webkit-border-top-right-radius:4px;border-top-right-radius:4px;-webkit-border-bottom-right-radius:4px;border-bottom-right-radius:4px;-moz-border-radius-topright:4px;-moz-border-radius-bottomright:4px}.pagination-centered{text-align:center}.pagination-right{text-align:right}.pagination-large ul>li>a,.pagination-large ul>li>span{padding:11px 19px;font-size:17.5px}.pagination-large ul>li:first-child>a,.pagination-large ul>li:first-child>span{-webkit-border-bottom-left-radius:6px;border-bottom-left-radius:6px;-webkit-border-top-left-radius:6px;border-top-left-radius:6px;-moz-border-radius-bottomleft:6px;-moz-border-radius-topleft:6px}.pagination-large ul>li:last-child>a,.pagination-large ul>li:last-child>span{-webkit-border-top-right-radius:6px;border-top-right-radius:6px;-webkit-border-bottom-right-radius:6px;border-bottom-right-radius:6px;-moz-border-radius-topright:6px;-moz-border-radius-bottomright:6px}.pagination-mini ul>li:first-child>a,.pagination-small ul>li:first-child>a,.pagination-mini ul>li:first-child>span,.pagination-small ul>li:first-child>span{-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;-webkit-border-top-left-radius:3px;border-top-left-radius:3px;-moz-border-radius-bottomleft:3px;-moz-border-radius-topleft:3px}.pagination-mini ul>li:last-child>a,.pagination-small ul>li:last-child>a,.pagination-mini ul>li:last-child>span,.pagination-small ul>li:last-child>span{-webkit-border-top-right-radius:3px;border-top-right-radius:3px;-webkit-border-bottom-right-radius:3px;border-bottom-right-radius:3px;-moz-border-radius-topright:3px;-moz-border-radius-bottomright:3px}.pagination-small ul>li>a,.pagination-small ul>li>span{padding:2px 10px;font-size:11.9px}.pagination-mini ul>li>a,.pagination-mini ul>li>span{padding:0 6px;font-size:10.5px}
+/*============================================================================================================================*/
+table.tableCss{
+    width: 100%;
+    /*    border-top: 4px solid #DF9B0A; */
+}
+table.tableCss thead tr{
+    border-bottom: 4px solid #fff; 
+}
+table.tableCss thead th{
+    /*background-color: #000;*/
+    /*    background-color: #4F4F4F;*/
+    /*background-color: #02355a;*/
+    background-color: #8147a0;
+    color: #fff;
+    line-height: 39px;
+    padding: 0 10px 0 10px;
+}
+
+table.tableCss tbody tr.oddRow{
+    background-color: #ffffff;
+    border-bottom: 1px #e5e4e4 solid;
+}
+table.tableCss tbody tr.evenRow{
+    background-color: #F9EDFF;
+    border-bottom: 1px #e5e4e4 solid;
+}
+table.tableCss tbody td{
+    color: #02355a;
+    line-height: 39px;
+    padding: 0 10px 0 10px;
+}
+table.tableCss tbody tr table{
+    width: 100%;
+    margin: 0 0 0 10px;
+    /*    border-top: 4px solid #DF9B0A; */
+}
+table.tableCss tbody tr table thead tr th {
+    /*background-color: #959494;*/
+    background-color: #B178CF;
+    color: #FFFFFF;
+    line-height: 39px;
+    padding: 0 10px;
+}
+table.tableCss tbody tr table tbody tr.oddRow{
+    background-color: #F9EDFF;
+    border: none;
+}
+table.tableCss tbody tr table tbody tr.evenRow{
+    background-color: #FCFCFC;
+    border: none;
+}
+table.tableCss tfoot tr{
+    border-top: 4px solid #8147a0;
+    border-bottom: 4px solid #8147a0;
+}
+table.tableCss tfoot th{
+    /*    background-color: #4F4F4F;
+        color: #fff;
+        line-height: 39px;
+        padding: 0 10px 0 10px;*/
+}
+
+.errorMsgSpan{
+    width: 250px;
+    color: #FF0000;
+    position: relative;
+    top: -6px;
+}
+.successMsgSpan{
+    width: 250px;
+    color: green;
+}
+
+/**************************
+    Start Date Picker
+**************************/
+
+.ui-datepicker {  
+    width: 216px;  
+    height: auto;  
+    margin: 5px auto 0;
+    font: 9pt Arial, sans-serif;  
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    /*=======By User=====*/
+    z-index: 100;
+    position: absolute;
+    /*top: 210px !important;*/
+}
+td a.ui-state-highlight{
+    /*width: 200px !important;*/
+    border: 1px solid #fcefa1/*{borderColorHighlight}*/;
+    background: #fbf9ee/*{bgColorHighlight}*/ url(images/ui-bg_glass_55_fbf9ee_1x400.png)/*{bgImgUrlHighlight}*/ 50%/*{bgHighlightXPos}*/ 50%/*{bgHighlightYPos}*/ repeat-x/*{bgHighlightRepeat}*/;
+    color: #363636/*{fcHighlight}*/;
+}
+/**************************
+    End Date Picker
+**************************/
+
+/**************************
+    Start Grid Editable
+**************************/
+fieldset table{
+    width: 100%;
+    padding: 10px;
+}
+fieldset table thead tr{
+    background-color: #B178CF;
+    color: #fff;
+}
+fieldset table thead th{
+    height: 39px;
+    line-height: 39px;
+    padding: 0 0 0 15px;
+}
+fieldset table tbody tr{
+    color: #000;
+}
+fieldset table tbody tr td{
+    color: #000;
+    min-height: 39px;
+    padding: 6px 0 6px 15px !important;
+}
+fieldset table tbody tr td input[type="text"]{
+    width: 95%;
+    height: 28px;
+    border: 2px solid #478409;
+    border-radius: 3px 3px 3px 3px; 
+}
+fieldset table tbody tr td span{
+    display: block !important;
+}
+fieldset table tbody tr td span input.custom-combobox-input{
+    width: 90% !important;
+    height: 28px !important;
+    border-left: 2px solid #478409 !important;
+    border-top: 2px solid #478409 !important;
+    border-bottom: 2px solid #478409 !important;
+    border-radius: 3px 0px 0px 3px !important;
+}
+fieldset table tbody tr td textarea{
+    width: 95%;
+    border: 2px solid #478409;
+    border-radius: 3px 3px 3px 3px;
+    position: relative;
+    top: 13px;
+}
+
+fieldset table tbody tr.evenRow{
+    background-color: #fff;
+}
+fieldset table tbody tr.oddRow{
+    background-color: #F9EDFF;
+}
+fieldset table tbody tr.evenRow input[type="text"]{
+    text-align: right;
+}
+fieldset table tbody tr.oddRow input[type="text"]{
+    text-align: right;
+}
+.colDebit input[type="text"]{
+    text-align: right;
+}
+.colCredit input[type="text"]{
+    text-align: right;
+}
+fieldset table tfoot tr{
+    background-color: #FFFFFF;
+    border-bottom: 4px solid #B178CF;
+    border-top: 4px solid #B178CF;
+    color: #FFFFFF;
+    height: 39px;
+}
+fieldset table tfoot tr td {
+    color: #000;
+    min-height: 39px;
+    padding: 6px 0 6px 15px !important;
+}
+fieldset table tfoot tr td input[type="text"]{
+    width: 95%;
+    height: 28px;
+    border: 2px solid #478409;
+    border-radius: 3px;
+}
+
+/**************************
+    End Grid Editable
+**************************/
+
+
+/**************************
+    Start For FieldSet and Accordion 
+**************************/
+div.pageHeadingPanel{
+    background-color: #FFFFFF;
+    border-bottom: 5px solid #F95507;
+    color: #478409;
+    font-size: 20px;
+    height: 37px;
+    padding: 15px 0 0 20px;
+    position: fixed;
+    top: 64.4px;
+    width: 98.5%;
+    z-index: 500;
+}
+div.pageHeadingPanel title{
+    display: block;
+    width: auto;
+    float: left;
+}
+div.printViewPageHeadingPanel{
+    background-color: #FFFFFF;
+    border-bottom: 5px solid #F95507;
+    color: #478409;
+    font-size: 20px;
+    height: 37px;
+    padding: 15px 0 0 20px;
+    position: fixed;
+    top: 64.4px;
+    width: 98.5%;
+    z-index: 500;
+    text-align: center;
+}
+div.printViewPageHeadingPanel title{
+    display: block;
+    width: auto;
+    /*float: left;*/
+}
+div.pageHeadingPanel div{
+    float: right;
+    padding: 0 20px 0 0;
+}
+/*=======OldCSS=======*/
+h3.ui-accordion-header{
+    /*padding: 5px 0 5px 15px;*/
+    padding: 0px;
+    /*height: 60px;*/
+    height: 39px;
+}
+h3.ui-accordion-header a.accordionAnchorHeading legend{
+    margin: 0;
+    padding: 0;
+    /*border: none;*/
+    /*border: 3px solid #fff;*/
+    position: relative;
+    color: #fff;
+    /*top: -16.0px;*/
+    top: 9px;
+    left: 25px;
+}
+/*h3.ui-accordion-header a.accordionAnchorHeading legend:focus{
+    background-color: #d2f29e;
+}
+h3.ui-accordion-header a.accordionAnchorHeading legend.active{
+    background-color: #d2f29e;
+}
+h3.ui-accordion-header a.accordionAnchorHeading legend:visited{
+    background-color: #d2f29e !important;
+}
+h3.ui-accordion-header a.accordionAnchorHeading legend:hover{
+    background-color: #d2f29e !important;
+}*/
+
+h3.ui-accordion-header span{
+    /*border: 1px solid #000000;*/
+    /*display: inline-table;*/
+    /*position: relative;*/
+    /*top: 20.5px;*/
+}
+div.ui-accordion-content{
+    /*padding: 10px 0px 10px 40px;*/
+}
+fieldset ul{
+    clear: both;
+}
+fieldset ul li{
+    color: red;
+    /*margin-left: 24%;*/
+}
+fieldset h3 a{
+    display: inline-block;
+    width:97% !important;
+    /*border: 1px solid #4F4F4F  !important;*/
+    border: none  !important;
+    /*background: url("../img/formbg-bar.png") repeat-x;*/
+    /*background-color: #e0f6bd;*/
+    /*height: 39px;*/
+    /*color: #ffffff;*/
+    font-size: 14px;
+    /*line-height:39px;*/
+    padding: 0 0 0 0px;
+    text-decoration: none;
+    /*margin: 0 0 0 25%;*/
+}
+fieldset div div label.zeroIndexAccount span.custom-combobox{
+    /*height: 28px !important;*/
+    width: 70% !important;
+}
+fieldset div div label span.custom-combobox input.custom-combobox-input {
+    height: 28px !important;
+    /*width: 100% !important;*/
+    width: 73.4% !important;
+    border-bottom: 2px solid #478409 !important;
+    border-left: 2px solid #478409 !important;
+    border-top: 2px solid #478409 !important;
+    border-radius: 3px 0 0 3px !important;
+}
+fieldset div label img.ui-datepicker-trigger{
+    /*border: 0px solid #003bb3 !important;*/
+    z-index: 200;
+    margin: 0 6px 0 0;
+}
+fieldset h3.ui-accordion-header, .ui-helper-reset.ui-state-default, .ui-corner-top, .ui-accordion-icons{
+    /*height: 0;*/
+    /*border: none;*/
+    border-bottom: 1px solid #fff;
+    background: none;
+}
+fieldset h3.ui-accordion-header, .ui-accordion-header-active, .ui-state-active{
+    /*height: 0;*/
+    /*height: 39px;*/
+    display: block;
+    width: auto;
+    border: none;
+    /*background: none;*/
+    /*background: #478409 !important;*/
+    /*background: #F95507 !important;*/
+    background: #8147a0 !important;
+
+}
+fieldset h3 span.ui-icon{
+    background-image: url("../img/btn-off.png") !important;
+    background-position: right top;
+    background-repeat: no-repeat !important;
+    float: right;
+    height: 26px;
+    left: -30.5px;
+    position: relative;
+    /*top: 32.5px;*/
+    top: 7px;
+    width: 26px;
+}
+fieldset h3 span.ui-iconON{
+    background-image: url("../img/btn-off.png") !important;
+    background-position: right top;
+    background-repeat: no-repeat !important;
+    float: right;
+    height: 26px;
+    left: -358.5px;
+    position: relative;
+    top: 3px;
+    width: 26px;
+}
+fieldset h3.ui-state-default{
+    border: none;
+    background: none;
+}
+fieldset h3.ui-state-active {
+    /*height: 0;*/
+    border: none;
+    background: none;
+}
+
+fieldset h3.ui-state-active:hover {
+    /*height: 0;*/
+    border: none;
+    background: none;
+}
+fieldset div{
+    display: inline-block;
+    width:100% !important;
+    /*border: 1px solid #4F4F4F  !important;*/
+    border: none !important;
+    padding: 0 0 0 5px;
+    /*margin: 0 0 0 25%;*/
+}
+fieldset div.ui-helper-reset.ui-widget-content{
+    background: none repeat scroll 0 0 transparent;
+    height: auto;
+    /*left: 35px;*/
+    /*margin: 0 0 0 25%;*/
+    padding: 10px 0 10px 0px;
+    position: relative;
+    /*top: 35px;*/
+}
+fieldset div input[type="submit"],button{
+    float: right;
+}
+
+fieldset div div{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+fieldset div div:nth-child(odd){
+    background-color: #f9edff;
+    color: #02355a;
+}
+fieldset div div:nth-child(even){
+    background-color: #fff;
+    color: #02355a;
+}
+label{
+    /*clear: both;*/
+    display: table-row;
+    float: left;
+    padding: 8px 8px 8px 30px;
+    width: 46%;
+    height: 39px;
+    line-height: 34px;
+}
+/*@media all  and (max-width: 480px)
+{
+    label{
+        clear: both;
+        display: table-row;
+        float: left;
+        padding: 8px;
+        width: 46%;
+        height: 39px;
+    }
+}*/
+label label{
+    /*clear: both;*/
+    display: table-row;
+    float: left;
+    padding: 8px;
+    width: 15%;
+    height: 14px;
+    line-height: 15.8px;
+}
+label span{
+    display:inline-block;
+    width: 25%;
+    margin: 0 15px 0 0;
+    /*border: 1px solid #002a80;*/
+    float:left;
+}
+label img{
+    /*clear: both;*/
+    /*border: 1px solid #000;*/
+    display: block;
+    position: relative;
+    /*    left: 97%;
+        top: -28px;*/
+
+}
+label input{
+    display:inline-block;
+    /*width: 80%;*/
+    margin: 0 6px 0 0;
+    border: 2px solid #478409;
+    float:left;
+    border-radius: 3px;
+    padding: 1px 0 0 5px;
+}
+fieldset label input[type="text"]{
+    width:60%;
+    height: 28px;
+}
+fieldset label textarea{
+    width:60%;
+    border: 2px solid #478409;
+    border-radius: 5px;
+    /*height: 150px;*/
+}
+fieldset label input[type="radio"]{
+    border: 2px solid #478409;
+    border-radius: 5px;
+}
+fieldset label select{
+    display:inline-block;
+    width: 61%;
+    margin: 0 15px 0 0;
+    border: 2px solid #478409;
+    float:left;
+    background-color: #fff;
+    /*background: transparent;*/
+    padding: 4px;
+    line-height: 1;
+    border-radius: 3px;
+    height: 30px;
+    -webkit-appearance: none;
+}
+fieldset label select option{
+    padding: 3px;
+    border-bottom: 1px solid #737a7a;
+    line-height: 28px;
+    /*height: 30px;*/
+    /*-webkit-appearance: none;*/
+}
+fieldset label select option:nth-child(odd){
+    background-color: #F9EDFF;
+}
+fieldset label select option:nth-child(even){
+    background-color: #fff;
+}
+/**************************
+    End For FieldSet and Accordion
+**************************/
+
+/**************************
+    Start Auto complete 
+**************************/
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+}
+.custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+    /* support: IE7 */
+    *height: 1.7em;
+    *top: 0.1em;
+    border: 2px solid #478409 !important;
+    width: 17px;
+}
+.custom-combobox-input {
+    margin: 0;
+    padding: 0.3em;
+}
+ul.ui-autocomplete{
+    width: 450px;
+    padding: 10px;
+}
+ul.ui-autocomplete li{
+    margin: 0 0 0 5px;
+    padding: 3px 3px 0px 5px;
+    line-height: 25px;
+    list-style: none;
+    border: 1px #000 solid;
+
+}
+/* tooltip styling. by default the element to be styled is .tooltip  */
+.my-tooltip-ui-state-highlight{
+    width: 335px !important;
+    height: 29px;
+    padding: 5px;
+    border: 1px solid #fcefa1/*{borderColorHighlight}*/;
+    background: #fbf9ee/*{bgColorHighlight}*/ url(images/ui-bg_glass_55_fbf9ee_1x400.png)/*{bgImgUrlHighlight}*/ 50%/*{bgHighlightXPos}*/ 50%/*{bgHighlightYPos}*/ repeat-x/*{bgHighlightRepeat}*/;
+    color: #363636/*{fcHighlight}*/;
+    /*display: block !important;*/
+    /*left: 203px !important;*/
+    /*position: relative !important;*/
+    /*top: -110.333px !important;*/
+}
+.ui-button-text{
+    width: auto;
+    display: table-cell;
+}
+
+form#voucherSearch div#accordion fieldset div div label span.custom-combobox {
+    width: 72%;
+    margin: 0px;
+}
+form#voucherSearch div#accordion fieldset div div label span.custom-combobox input{
+    width: 78% !important;
+    margin: 0px;
+}
+/**************************
+    End Auto complete 
+**************************/
+td.chkBoxCss input[type="checkbox"] + label {
+    color: #333;
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    display: inline;
+}
+td.intermediateCheckBoxCss input[type="checkbox"] + label {
+    color: #333;
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    display: inline;
+}
+td.chkBoxCss input[type="checkbox"] + label span {
+    /*background: url("check_radio_sheet.png") no-repeat scroll -19px top transparent;*/
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/checkBox_unchecked.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+td.intermediateCheckBoxCss input[type="checkbox"] + label span {
+    /*background: url("check_radio_sheet.png") no-repeat scroll -19px top transparent;*/
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/checkBox_intermediate.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+td.unCheckBoxCss input[type="checkbox"] + label span {
+    /*background: url("check_radio_sheet.png") no-repeat scroll -19px top transparent;*/
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/checkBox_unchecked.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+/*td.intermediateCheckBoxCss input[type="checkbox"]:checked + label span {
+    background-image: url('../img/checkBox_checked.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}*/
+td.chkBoxCss input[type="checkbox"]:checked + label span {
+    background-image: url('../img/checkBox_checked.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+td.chkBoxCssChecked input[type="checkbox"] + label span {
+    background-image: url('../img/checkBox_checked.gif');
+    width: 14px;
+    height: 14px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+/**************************
+    Start Login Page 
+**************************/
+.topPanelLoginContainer{
+    margin-top: 20px;
+    background-color: #12afa8;
+    width: 100%;
+    height:40px;
+
+}
+.loginLogoImage{
+    height: 57px;
+    margin-left: 10px;
+}
+.mainContainerForLoginPage{
+    width:100%;
+    margin:0px auto ;
+    padding-top: 2%;
+}
+.loginBar{
+    /*background-color: #D2F29E;*/
+    background-color: #2b073e;
+    /*background-color: #325013;*/
+    /*background-color: #002540;*/
+    /*background-color: #f26522;*/
+    height:40px;
+    line-height: 40px;
+    padding-left: 10px;
+    color: #fff;
+}
+.loginScreenbg{
+    display: inline-block;
+    width:100%;
+    padding: 2% 0 1.5% 0
+}
+.loginScreen{
+    display: inline-block;
+    background-image: url('../img/loginPageBG.png');
+    background-repeat: no-repeat;
+    width:522px;
+    height:326px;
+    margin-left: 32%;
+    padding-top: 14px;
+}
+.loginScreen div{
+    float:left;
+    width: 200px;
+    padding: 76px 0 0 109px;
+}
+div.loginScreen div label{
+    float: left;
+    width: 200px;
+    padding: 10px 0 0 0px;
+    height: auto;
+    line-height: 15px;
+}
+.loginScreen div label span{
+    float: left;
+    width: 200px;
+    color: #fff;
+    margin: 0px;
+}
+
+.loginScreen div label input[type="text"]{
+    float:left;
+    width: 175px;
+    margin: 6px 6px 0 0;
+    height: 28px;
+    border: 1px solid #f26522;
+}
+.loginScreen div label input[type="password"]{
+    float: left;
+    width: 175px;
+    margin: 6px 6px 0 0;
+    height: 28px;
+    border: 1px solid #f26522;
+}
+.loginbutton{
+    float: left;
+    width: 104px !important;
+    height: 105px !important;
+    /*border: 1px solid #CCC;*/
+    text-align: left;
+    padding: 97px 0 0 44px !important; 
+}
+div.loginbutton input[type="submit"]{
+    background: url('../img/loginBtn.png') no-repeat center center;
+    width: 104px;
+    height: 105px;
+}
+.forgotpassword {
+    display: inline-block;
+    padding: 8px 0 0 2px;
+}
+.forgotpassword a{
+    color: #939399;
+}
+
+/**************************
+End Login Page 
+**************************/
+
+
+div#msgTextDiv{
+    /*border: 1px solid #737A7A;*/
+    display: none;
+    float: left !important;
+    height: 25px;
+    margin: 0 0 0 15%;
+    width: auto;
+}
+.submit
+{
+    float :right;
+    /*margin-right: 8%;*/
+    margin-right: 20px;
+    /*    margin-top: 0.7%;*/
+    margin-top: 8px;
+    text-align: right;
+    height: 39px;
+}
+.lblBtnContainer{
+    float: right !important; 
+    width: auto;
+}
+/****************************  
+Start Voucher CSS
+****************************/
+div.simpleReportViewerPageTopPanelContainer {
+    background-color: #B178CF;
+    height: 54px;
+    padding: 5px 0 1px 5px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.simpleReportViewerPage{
+    margin: auto;
+    padding: auto;
+    width: 100%
+}
+.voucherReportBody{
+    margin: 0 0 40px 0;
+    float: left;
+    width: 99%;
+    border: 4px solid #2b073e;
+}
+.vrReportHeadingContainerDiv{
+    float: left;
+    width: 100%;
+    height: 60px;
+    margin: 5px;
+}
+.vrReportLogo{
+    float: left;
+    background: url('../img/logo.png') top center no-repeat;
+    width: 258px;
+    height: 58px;
+}
+.vrReportHeading{
+    float: left;
+    width: 800px;
+}
+.vrReportBasicInfo{
+    float: right;
+    width: 240px;
+    height: 85px;
+}
+.vrReportParticularsTableDiv{
+    /*float: left;*/
+    /*position: relative;*/
+    /*top: 10px;*/
+    width: 100%;
+}
+.vrReportRow {
+    float: left;
+    height: 25px;
+    width: 240px;
+}
+.vrReportHeadColumn{
+    margin: 0px 1px 0px 0px;
+    padding: 4px;
+    float: left;
+    width: 71px;
+    height: 25px;
+    /*border-right: 1px solid gray;*/ 
+}
+.vrReportOdd{
+    background-color: #B178CF;
+}
+.vrReportEven{
+    background-color: #F9EDFF;
+}
+.vrReportColumn {
+    float: left;
+    height: 25px;
+    padding: 4px;
+    width: 152px;
+}
+/*  End Voucher CSS*/
+/**************Umairs Work for Image upload****************/
+
+/*Uploaded image wrapper*/
+span.uploadeFileWrapper { margin:auto; text-align:left; }
+span.uploadeFileWrapper img { display:inline; border:6px solid #E2E2E2;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; }
+span.uploadeFileWrapper a:hover img { border:6px solid #CCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; }
+
+
+#vasPhoto_uploads_Status{ padding-left: 180px; 
+                          height: 50px;
+}
+
+
+/***********End of Work for Image Upload*********************/
+</style>

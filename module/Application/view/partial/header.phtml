@@ -1,0 +1,139 @@
+<script type="text/javascript">
+    //********************** CONSTANTS
+    var DATE_FORMAT = "dd-MM-yy";
+    var SUPER_CONTROL = <?php echo \Account\Entity\Account::SUPER_CONTROL ?>;
+    var CONTROL = <?php echo \Account\Entity\Account::CONTROL ?>;
+    var DETAILED = <?php echo \Account\Entity\Account::DETAILED ?>;
+    //-----Classes
+    var ASSET = <?php echo \Account\Entity\Account::ASSET ?>;
+    var INCOME = <?php echo \Account\Entity\Account::INCOME ?>;
+    var EXPENSE = <?php echo \Account\Entity\Account::EXPENSE ?>;
+    var LIABILITY = <?php echo \Account\Entity\Account::LIABILITY ?>;
+    var CAPITAL = <?php echo \Account\Entity\Account::CAPITAL ?>;
+    //-----SuperControl Account Codes
+    var CODE_ASSET = "<?php echo \Account\Entity\Account::CODE_ASSET ?>";
+    var CODE_INCOME = "<?php echo \Account\Entity\Account::CODE_INCOME ?>";
+    var CODE_EXPENSE = "<?php echo \Account\Entity\Account::CODE_EXPENSE ?>";
+    var CODE_LIABILITY = "<?php echo \Account\Entity\Account::CODE_LIABILITY ?>";
+    var CODE_CAPITAL = "<?php echo \Account\Entity\Account::CODE_CAPITAL ?>";
+    //-----Default Types
+    var CASH_PAYMENT_VOUCHER = <?php echo \Account\Entity\VoucherType::CASH_PAYMENT_VOUCHER ?>;
+    var CASH_RECEIPT_VOUCHER = <?php echo \Account\Entity\VoucherType::CASH_RECEIPT_VOUCHER ?>;
+    var BANK_PAYMENT_VOUCHER = <?php echo \Account\Entity\VoucherType::BANK_PAYMENT_VOUCHER ?>;
+    var BANK_RECEIPT_VOUCHER = <?php echo \Account\Entity\VoucherType::BANK_RECEIPT_VOUCHER ?>;
+    var JOURNAL_VOUCHER = <?php echo \Account\Entity\VoucherType::JOURNAL_VOUCHER ?>;
+    var BANK_TO_BANK_TRANSFER_VOUCHER = <?php echo \Account\Entity\VoucherType::BANK_TO_BANK_TRANSFER ?>;
+    var CASH_TO_CASH_TRANSFER_VOUCHER = <?php echo \Account\Entity\VoucherType::CASH_TO_CASH_TRANSFER ?>;
+    
+    //-----Behavior
+    var PAYMENT = <?php echo \Account\Entity\VoucherType::PAYMENT; ?>;
+    var RECEIPT = <?php echo \Account\Entity\VoucherType::RECEIPT; ?>;
+    var JOURNAL = <?php echo \Account\Entity\VoucherType::JOURNAL; ?>;
+    var TRANSFER = <?php echo \Account\Entity\VoucherType::TRANSFER ?>;
+    //------General Settings 
+    var codeSaperator = '';
+    var FY_START_DATE = new Date('<?php echo $this->layout()->currentFyStartDate->format(\Application\Library\Application::DATE_FORMAT); ?>');
+    var FY_END_DATE = new Date('<?php echo $this->layout()->currentFyEndDate->format(\Application\Library\Application::DATE_FORMAT); ?>');
+    //********************** GLOBAL VARIABLES
+    var SelectBoxNullValue = "";
+    var msgText = {
+        deleteSuccessMsg: '<p style="color: green;">░ Data has been deleted successfully</p>',
+        deleteErrorMsg: '<p style="color: red;">data deletion has been failed due to sme unexpected behavior.</p>',
+        saveSuccessMsg: ""
+    };
+    var submitBtnsVals = {
+        value: 'Search',
+    };
+    var errorMsg = "";
+    var gridAccountsJsonStr = {};
+    var gridRowNumber = 1;
+    var initialValForTotalAmount = 0.0;
+    var dateFormater = {
+        dateFormat: DATE_FORMAT,
+        changeMonth: true,
+        changeYear: true,
+        prevText: '',
+        nextText: '',
+        showOn: "button",
+        buttonImage: '<?php echo $this->basePath() ?>' + "/img/btnCalendar.png",
+        buttonImageOnly: true
+    };
+    //********************** LOCAL VRIABLES
+    var urlHome = "<?php echo $this->url('home') ?>";
+    var urlCompany = "<?php echo $this->url('company', array('action' => 'index', 'controller' => 'Company')) ?>";
+    var urlCompanyAdd = "<?php echo $this->url('company', array('action' => 'add', 'controller' => 'Company')) ?>";
+    var urlCompanyPrint = "<?php echo $this->url('company', array('action' => 'printPreview', 'controller' => 'Company')) ?>";
+
+    var urlUser = "<?php echo $this->url('user', array('action' => 'index', 'controller' => 'User')) ?>";
+    var urlUserAdd = "<?php echo $this->url('user', array('action' => 'add', 'controller' => 'User')) ?>";
+
+    var urlBranch = "<?php echo $this->url('branch', array('action' => 'index', 'controller' => 'Branch')) ?>";
+    var urlBranchAdd = "<?php echo $this->url('branch', array('action' => 'add', 'controller' => 'Branch')) ?>";
+    var urlBranchPrint = "<?php echo $this->url('branch', array('action' => 'printPreview', 'controller' => 'Branch')) ?>";
+
+    var urlAccount = "<?php echo $this->url('account', array('action' => 'index', 'controller' => 'Account')); ?>";
+    var urlAccountAdd = "<?php echo $this->url('account', array('action' => 'add', 'controller' => 'Account')); ?>";
+    var urlAccountPrint = "<?php echo $this->url('account', array('action' => 'printPreview', 'controller' => 'Account')); ?>";
+
+    var urlVoucher = "<?php echo $this->url('voucher', array('action' => 'index', 'controller' => 'Voucher')); ?>";
+    var urlVoucherAdd = "<?php echo $this->url('voucher', array('action' => 'add', 'controller' => 'Voucher')); ?>";
+    var urlVoucherPrint = "<?php echo $this->url('voucher', array('action' => 'printPreview', 'controller' => 'Voucher')); ?>";
+
+    var urlFinancialYear = "<?php echo $this->url('financial_year', array('action' => 'index', 'controller' => 'FinancialYear')); ?>";
+    var urlFinancialYearAdd = "<?php echo $this->url('financial_year', array('action' => 'add', 'controller' => 'FinancialYear')); ?>";
+    var urlFinancialYearPrint = "<?php echo $this->url('financial_year', array('action' => 'printPreview', 'controller' => 'FinancialYear')); ?>";
+
+
+    var urlRole = "<?php echo $this->url('role', array('action' => 'index', 'controller' => 'Role')); ?>";
+    var urlRoleAdd = "<?php echo $this->url('role', array('action' => 'add', 'controller' => 'Role')); ?>";
+    var urlRolePrint = "<?php echo $this->url('role', array('action' => 'printPreview', 'controller' => 'Role')); ?>";
+
+
+    var urlResource = "<?php echo $this->url('resource', array('action' => 'index', 'controller' => 'Resource')); ?>";
+    var urlResourceAdd = "<?php echo $this->url('resource', array('action' => 'add', 'controller' => 'Resource')); ?>";
+    var urlResourcePrint = "<?php echo $this->url('resource', array('action' => 'printPreview', 'controller' => 'Resource')); ?>";
+
+
+
+    var urlAllocation = "<?php echo $this->url('allocation', array('action' => 'index', 'controller' => 'Allocation')); ?>";
+    var urlAllocationAdd = "<?php echo $this->url('allocation', array('action' => 'allocate', 'controller' => 'Allocation')); ?>";
+    var urlAllocationPrint = "<?php echo $this->url('allocation', array('action' => 'printPreview', 'controller' => 'Allocation')); ?>";
+
+
+    var urlOpeningBalance = "<?php echo $this->url('opening_balance', array('action' => 'index', 'controller' => 'OpeningBalance')); ?>";
+    var urlOpeningBalanceAdd = "<?php echo $this->url('opening_balance', array('action' => 'add', 'controller' => 'OpeningBalance')); ?>";
+    var urlOpeningBalancePrint = "<?php echo $this->url('opening_balance', array('action' => 'printPreview', 'controller' => 'OpeningBalance')); ?>";
+
+
+
+
+    var urlCountry = "<?php echo $this->url('country', array('action' => 'index', 'controller' => 'Country')); ?>";
+    var urlCountryAdd = "<?php echo $this->url('country', array('action' => 'add', 'controller' => 'Country')); ?>";
+    var urlCountryPrint = "<?php echo $this->url('country', array('action' => 'printPreview', 'controller' => 'Country')); ?>";
+
+    var urlLogout = "<?php echo $this->url('administration', array('action' => 'logout', 'controller' => 'Administration')); ?>";
+
+</script>
+<?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+<?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+<!-- Le styles -->
+<?php
+echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+//        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+        ->prependStylesheet($this->basePath() . '/css/style.css')
+        ->prependStylesheet($this->basePath() . '/css/flexnav.css')
+        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery-ui.css')
+        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery.ui.datepicker.css')
+?>
+
+<!-- Scripts -->
+<?php
+echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath() . '/js/all.js')
+        ->prependFile($this->basePath() . '/js/jquery.flexnav.js')
+        ->prependFile($this->basePath() . '/js/jquery-ui.js')
+//        ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/js/jquery.min.js');
+?>

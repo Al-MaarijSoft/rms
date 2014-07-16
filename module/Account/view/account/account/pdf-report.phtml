@@ -1,0 +1,63 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+
+$title = $this->translate('Accounts Report');
+$this->headTitle($title);
+$counter = 0;
+?>
+<!--<link rel="stylesheet" type="text/css" href="<?php // echo $this->serverUrl(); ?> . '/css/style.css')"-->
+
+<?php echo $this->partial('partial/pdf-style-head', 'Application'); ?>
+
+<script type="text/javascript">
+    var urlAddAccount = "<?php echo $this->url('account', array('action' => 'add', 'controller' => 'Account')); ?>";
+    var urlPrintAccount = "<?php echo $this->url('account', array('action' => 'print', 'controller' => 'Account')); ?>";
+    var urlEditAccount = "<?php echo $this->url('account', array('action' => 'edit', 'controller' => 'Account')); ?>";
+</script>
+
+<div id="pageMainDiv">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+    <table id="tblAccountList" class="tableCss">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Parent Code</th>
+                <th>Parent Name</th>
+                <th>Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($this->Accounts as $Account) :
+                $counter++;
+                $counterSub = 0;
+                if ($counter % 2)
+                    $rowCss = 'oddRow';
+                else
+                    $rowCss = 'evenRow';
+                ?>
+                <tr class="<?php echo $rowCss; ?>" data-tt-id="<?php echo $Account->getId(); ?>" <?php echo (is_object($Account->getParentAccount()) ? 'data-tt-parent-id="' . $Account->getParentAccount()->getId() . '"' : ''); ?>>
+                    <td><?php echo $this->escapeHtml($Account->getCode()); ?></td>
+                    <td><?php echo $this->escapeHtml($Account->getName()); ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getCode() : 'NULL'); ?></td>
+                    <td><?php echo (is_object($Account->getParentAccount()) ? $Account->getParentAccount()->getName() : 'NULL'); ?></td>
+                    <td><?php echo $Account->getLevel(); ?></td>
+                    <td><?php echo ($Account->getStatus() ? 'Active' : 'Inactive'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="6">&nbsp;</th>
+            </tr>    
+        </tfoot>
+    </table>
+</div>
+
+<?php // echo $this->partial('partial/pdf-style-foot', 'Application'); ?>

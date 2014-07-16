@@ -1,0 +1,9 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$title = $this->translate('Welcome to Login Page Of ERPSystem');
+$this->headTitle($title);
+?>
+<div id="pageMainDiv">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    
+</div>

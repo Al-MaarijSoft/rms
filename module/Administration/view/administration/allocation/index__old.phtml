@@ -1,0 +1,65 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/manufacturing.module.js'); ?>
+<?php
+$title = 'Allocate Resources';
+echo $this->headTitle($title);
+?>
+<script type="text/javascript">
+    var urlAllocate = "<?php echo $this->url('allocation', array('action' => 'allocate', 'controller' => 'Allocation')); ?>";
+</script>
+<form name="Voucher" method="post" action="<?php $this->url('allocation', array('action' => 'allocate', 'controller' => 'Allocation')); ?>">
+    <div id="pageMainDiv">
+        <fieldset>
+            <p>
+                <a href="javascript:loadPage(urlAllocate);">Allocate Resources</a>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Basic Info</legend>
+            <label>
+                <span>Role Name:</span>
+                <select id="role" name="role">
+                    <option value="">Select Role</option>
+                    <?php
+                    foreach ($selectRoleData as $Role => $value)
+                    {
+                        ?>
+                        <option value="<?php echo $Role; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+                </select>
+            </label>  
+        </fieldset>
+        <fieldset>
+            <legend class="legendHeadingOfOtherIndexOfAccounts">Allocate Resources:</legend>
+            <table id="tblAllocationList" class="table">
+                <tr>
+                    <th>Resources</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                $count = 0;
+                foreach ($this->Allocations as $Allocation)
+                {
+                    ?>
+                    <tr id="<?php echo $Allocation->getId(); ?>" data-tt-id="<?php echo $Allocation->getId(); ?>" <?php echo (is_object($Allocation->getParent()) ? 'data-tt-parent-id="' . $Allocation->getParent()->getId() . '"' : ''); ?>>
+                        <td><?php echo @$Allocation->getName(); ?></td>
+                        <td><span class="identifier" style="padding-left: 38px;"></span></td>
+                    </tr>
+                <?php }; ?>
+            </table>
+        </fieldset>
+    </div>
+</form>
+<script>
+    jQuery(document).ready(function() {
+        jQuery("#tblAllocationList").treetable({expandable: true});
+    });
+    jQuery('select[name="role"]').change(function() {
+        var roleId = jQuery(this).val();
+        var url = "<?php echo $this->url('allocation', array('action' => 'retrieveAllocatedResources', 'controller' => 'Allocation')) ?>";
+//        url = url + '/' + jQuery('select[name="country"]').val();
+        populateResourceTdForRoles(url, roleId);
+    });
+</script>

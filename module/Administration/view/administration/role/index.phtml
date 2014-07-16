@@ -1,0 +1,58 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$title = $this->translate('Roles');
+$this->headTitle($title);
+$counter = 0;
+?>
+<script type="text/javascript">
+    var urlAddRole = "<?php echo $this->url('role', array('action' => 'add', 'controller' => 'Role')); ?>";
+    var urlEditRole = "<?php echo $this->url('role', array('action' => 'edit', 'controller' => 'Role')); ?>";
+</script>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->escapeHtml($title); ?>
+        <div><button id="printprviewbtn" onclick="javascript:loadPage(urlAddRole);" title="Print Role"></button></div>
+        <div><button id="addbtn" onclick="javascript:loadPage(urlAddRole);" title="Add Role"></button></div>
+    </div>
+    <div style="clear: both"></div>
+    <table class="tableCss">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $counter = 0;
+            foreach ($this->Paginator as $Role)
+            {
+                $counter++;
+                if ($counter % 2)
+                    $rowCss = 'oddRow';
+                else
+                    $rowCss = 'evenRow';
+                ?>
+                <tr  class="<?php echo $rowCss; ?>"> 
+                    <td><?php echo @$counter; ?></td>
+                    <td><?php echo $this->escapeHtml(@$Role->getName()); ?></td>
+                    <td>
+                        <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_view.png" style="border: none;" border="0" title="View Record" /></a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_edit.png" style="border: none;" border="0" title="Edit Record" /></a>
+                        &nbsp;&nbsp;
+                        <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/delete.png" style="border: none;" border="0" title="Delete Record" /></a>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3">&nbsp;</th>
+            </tr>    
+        </tfoot>
+    </table>
+</div>

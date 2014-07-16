@@ -1,0 +1,87 @@
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ * 
+ */
+var jsonAccountCodeNameStr = '';
+
+function  getMaxVrId(url, voucherType) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {voucherType: voucherType}
+    }).success(function(data) {
+
+//        var vrNumber = jQuery('select[name="voucher_type"][selected=true]').attr('code') + data
+        jQuery('input[name="voucher_number"]').val(data);
+    });
+}
+function populateVoucherSelectBoxId(url, elementForEvent, populatedElementOne, populatedElementTwo) {
+    if (jQuery('select[name="' + elementForEvent + '"]').val() !== "")
+    {
+        jQuery('select[id="' + populatedElementOne + '"]').html('<option value="">Select Voucher Code</option>');
+        jQuery('select[id="' + populatedElementTwo + '"]').html('<option value="">Select Vocuher Name</option>');
+        jQuery.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                jQuery.each(data.Code, function(key, value) {
+                    jQuery('select[id="' + populatedElementOne + '"]')
+                            .append($("<option></option>")
+                            .attr("value", key)
+                            .text(value));
+                });
+                jQuery.each(data.Name, function(key, value) {
+                    jQuery('select[id="' + populatedElementTwo + '"]')
+                            .append($("<option></option>")
+                            .attr("value", key)
+                            .text(value));
+                });
+            },
+        });
+    }
+    else
+        alert('Please select Country');
+}
+function populateVoucherSelectBoxName(url, elementForEvent, populatedElementOne, populatedElementTwo) {
+    if (jQuery('select[name="' + elementForEvent + '"]').val() !== "")
+    {
+        jQuery('select[name="' + populatedElementOne + '"]').html('<option value="">Select Voucher Code</option>');
+        jQuery('select[name="' + populatedElementTwo + '"]').html('<option value="">Select Vocuher Name</option>');
+        jQuery.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                jsonWithAccountCodeNameStr = data;
+                appendValues(populatedElementOne, populatedElementTwo, data);
+
+            },
+        });
+    }
+    else
+        alert('Please select Country');
+}
+/////////////////////////////////Code TO populate DropDown For Name and Account Type
+function appendValues(populatedElementOne, populatedElementTwo, data) {
+    jQuery('select[id="' + populatedElementOne + '"]').html('<option value="">Select Voucher Code</option>');
+    jQuery('select[id="' + populatedElementTwo + '"]').html('<option value="">Select Vocuher Name</option>');
+    jQuery.each(data.Code, function(key, value) {
+        jQuery('select[id="' + populatedElementOne + '"]')
+                .append($("<option></option>")
+                .attr("value", key)
+                .text(value));
+    });
+    jQuery.each(data.Name, function(key, value) {
+        jQuery('select[id="' + populatedElementTwo + '"]')
+                .append($("<option></option>")
+                .attr("value", key)
+                .text(value));
+    });
+}
+
+
+function appendValuesAndAttrToDropDown() {
+
+}

@@ -1,0 +1,59 @@
+<?php
+/* <!--========== START FancyBox Popup Style & Script ==========--> */
+//echo $this->headLink()->appendStylesheet($this->basePath('assets/plugins/fencybox/jquery.fancybox.css?v=2.1.5'));
+//echo $this->headScript()->appendFile($this->basePath('assets/plugins/fencybox/jquery.fancybox.js?v=2.1.5'));
+$title = 'FancyBox';
+$this->headTitle($title);
+?>
+<script>
+    $(document).ready(function() {
+        //*******Start FancyBox
+        $(".fancybox").fancybox(fancyBoxSettings(600, 400));
+        //*******End FancyBox
+    });
+</script>
+<!--========== End FancyBox Popup Style & Script ==========-->
+<a class="fancybox" href="#participantsFancyBox" title="Message Event Participants" ><button class="btn">Show Fancy Box</button></a>
+<!--<a class="fancybox fancybox.ajax" href="http://google.com" title="Message Event Participants" ><button>Show Fancy Box</button></a>-->
+
+<!--======================================== Start FancyBox Popup Html ========================================-->
+<!--<div style="display: none;">-->
+    <!--<div id="participantsFancyBox">-->
+        <div id="participantsFancyBox" style="display: none;">
+            <form method="POST" action="http://phbi.loc/internal/events/sendEmailToParticipants" accept-charset="UTF-8" id="frmGrpMsg"><input name="_token" type="hidden" value="kCQEX8o6hKuw3wVOicMa3nD0VLHdi2Twh3tMF9BU">        <div class="w640 p-40 bg_fff pd_lft">
+                    <div id="divError" class="hbi_adminFormErrorList" style="display: none">
+                        <ul>
+                            <li id="errorSub" class="errors">
+
+                            </li>
+                            <li id="errorMsg" class="errors">
+
+                            </li>
+                            <li id="errorMsgLength" class="errors">
+
+                            </li>
+                        </ul>
+                    </div>
+                    <input name="user_id" type="hidden" value="0">            <input name="event_id" type="hidden" value="27">            <p class="form_label"><label for="subject">Subject</label></p>
+                    <div class="form_input mb10"><input class="p_lft5" id="txtSubject" name="subject" type="text"></div>
+                    <p class="form_label"><label for="message">Message</label></p>
+                    <div class="form_txtarea"><textarea class="p_lft5" id="txtMessage" name="message" cols="50" rows="10"></textarea></div>
+                    <div class="send_form"><button class="send_form btn" id="send_msg" type="button"> </button></div>
+                    <div class="cancel"><button class="cancel btn" type="button"> </button></div>
+                </div>
+            </form>    
+        </div>
+        <!--        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 780px; height: auto; position: absolute; top: 78px; left: 285px; opacity: 1; overflow: visible;">
+                    <div class="fancybox-skin" style="padding: 15px; width: auto; height: auto;">
+                        <div class="fancybox-title fancybox-title-inside-wrap">Message Event Participants</div>
+                        <div class="fancybox-outer">
+                            <div class="fancybox-inner" style="overflow: auto; width: 780px; height: auto;">
+                               
+                            </div>
+                        </div>
+                        <a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>
+                    </div>
+                </div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--======================================== Start FancyBox Popup Html ========================================-->

@@ -1,0 +1,100 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+echo $this->headScript()->appendFile($this->basePath('/js/autocomplete-combo.js'));
+$title = 'Add Opening Balance For Account';
+//$this->headTitle($title);
+?>
+<?php
+$Form = $this->Form;
+$Form->setAttribute('action', $this->url('opening_balance', array('action' => 'edit', 'controller' => 'OpeningBalance', 'id' => $this->id)));
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->headTitle($title); ?>
+        <div>
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlOpeningBalance);" />
+            <input type="submit" value="Save" />
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading">
+                    <legend><?php echo $this->escapeHtml($title); ?></legend>
+                </a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('financial_year'));
+                    echo (isset($this->errorMsgs['financial_year'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['financial_year']) . '</span>' : '';
+                    echo $this->formRow($Form->get('account'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('debit'));
+                    echo $this->formRow($Form->get('credit'));
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+        <div class="submit"> 
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlAccount);" />
+            <?php echo $this->formSubmit($Form->get('submit')); ?>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->form()->closeTag(); ?>
+<script type="text/javascript">
+                jQuery(document).ready(function() {
+                    jQuery("#accordion").accordion({
+                        header: "h3",
+                        autoheight: false,
+                        active: 0,
+                        alwaysOpen: false,
+                        fillspace: false,
+                        collapsible: true,
+                        heightStyle: "content"
+                                //heightStyle: content   //auto, fill, content
+
+                    });
+                    //========================================================
+                    jQuery(function() {
+                        jQuery('[name="financial_year"]').combobox();
+                        jQuery("#toggle").click(function() {
+                            jQuery('[name="financial_year"]').toggle();
+                        });
+                    });
+                    //========================================================
+                    jQuery(function() {
+                        jQuery('[name="account"]').combobox();
+                        jQuery("#toggle").click(function() {
+                            jQuery('[name="account"]').toggle();
+                        });
+                    });
+                    //==========================================================
+                    jQuery('[name="debit"]').change(function() {
+                        jQuery('[name="credit"]').val(0);
+                    });
+                    jQuery('[name="credit"]').change(function() {
+                        jQuery('[name="debit"]').val(0);
+
+                    });
+                    //==========================================================
+                    jQuery('[name="debit"]').keydown(function(event) {
+                        getOnlyDecimalValue(event, jQuery(this).val());
+                    });
+                    //==========================================================
+                    jQuery('[name="credit"]').keydown(function(event) {
+                        getOnlyDecimalValue(event, jQuery(this).val());
+                    });
+//    jQuery('span.custom-combobox').css('display: none');
+                });
+</script>

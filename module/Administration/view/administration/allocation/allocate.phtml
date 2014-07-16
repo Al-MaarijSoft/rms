@@ -1,0 +1,148 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/manufacturing.module.js'); ?>
+<?php
+$title = 'Allocate Resources';
+//echo $this->headTitle($title);
+?>
+<form name="Voucher" method="post" action="<?php $this->url('allocation', array('action' => 'allocate', 'controller' => 'Allocation')); ?>">
+    <div id="pageMainDiv">
+        <fieldset>
+            <legend>Basic Info</legend>
+            <label>
+                <span>Role Name:</span>
+                <select id="role" name="role">
+                    <option value="">Select Role</option>
+                    <?php
+                    foreach ($selectRoleData as $Role => $value)
+                    {
+                        ?>
+                        <option value="<?php echo $Role; ?>"><?php echo $value; ?></option>
+                    <?php } ?>
+                </select>
+            </label>  
+        </fieldset>
+        <fieldset>
+            <legend class="legendHeadingOfOtherIndexOfAccounts">Allocate Resources:</legend>
+            <table id="tblAllocationList" class="tableCss" style="width: 30%">
+<!--                <tr>
+                    <th>Allocate Resources</th>
+                </tr>-->
+                <?php
+                $counter = 0;
+                foreach ($this->Allocations as $Allocation)
+                {
+                    $counter++;
+                    $counterSub = 0;
+                    if ($counter % 2)
+                        $rowCss = 'oddRow';
+                    else
+                        $rowCss = 'evenRow';
+                    ?>
+                    <tr id="<?php echo $Allocation->getId(); ?>" data-tt-id="<?php echo $Allocation->getId(); ?>" <?php echo (is_object($Allocation->getParent()) ? 'data-tt-parent-id="' . $Allocation->getParent()->getId() . '"' : 'class="noParent' . $rowCss . '"'); ?>>
+                        <td class="chkBoxCss">
+                            <input type="checkbox" id="status-<?php echo $Allocation->getId(); ?>" name="status[]" value="<?php echo $Allocation->getId(); ?>" style="display: none;" class="<?php echo (is_object($Allocation->getParent()) ? 'cssParentId-' . $Allocation->getParent()->getId() : ''); ?>" />
+                            <label for="status-<?php echo $Allocation->getId(); ?>">
+                                <span ></span>
+                                <?php echo @$Allocation->getName(); ?>
+                            </label>
+                        </td>
+                    </tr>
+                <?php }; ?>
+            </table>
+            <input type="submit" name="submit" value="Allocate">
+        </fieldset>
+    </div>
+</form>
+<script>
+    jQuery(document).ready(function() {
+        jQuery("#tblAllocationList").treetable({expandable: true});
+    });
+    jQuery('select[name="role"]').change(function() {
+        var roleId = jQuery(this).val();
+        var url = "<?php echo $this->url('allocation', array('action' => 'retrieveIfRolesExist', 'controller' => 'Allocation')) ?>";
+        var redirectUrl = "<?php echo $this->url('allocation', array('action' => 'edit', 'controller' => 'Allocation')) ?>";
+        redirectUrl = redirectUrl + '/' + jQuery('select[name="role"]').val();
+        checkIfRoleAlreadyExists(url, roleId, redirectUrl);
+    });
+    jQuery('[id^="status-"]').change(function() {
+        var idValOfParent = jQuery(this).parents('tr').attr('data-tt-id');
+        var selector = 'input.cssParentId-' + idValOfParent;
+        var parentIdLevel_2 = $(this).parents('tr').attr('data-tt-parent-id');
+        var parentIdLevel_1 = jQuery('tr#' + parentIdLevel_2).attr('data-tt-parent-id');
+        //        var parentSubID = jQuery(this).parents('tr').attr('data-tt-parent-id');
+        if (this.checked) {
+
+            jQuery('tr#' + parentIdLevel_2 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+            jQuery('tr#' + parentIdLevel_1 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+            var count = 0;
+            jQuery("tr[data-tt-parent-id='" + parentIdLevel_2 + "']").each(function() {
+                if (jQuery(this).find('td:first input').is(':checked') == true) {
+                    count++;
+                }
+            });
+            if (count == 4) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').attr('checked', 'checked');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCssChecked');
+//                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCss');
+            }
+            if (jQuery('tr#' + parentIdLevel_1 + ' td:first input').is(':checked') == true) {
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCss');
+            }
+//            if (jQuery("tr[data-tt-id='" + parentIdLevel_1 + "']").find('input[type=checkbox]:not(:checked)').length) {
+//            }
+            var previous = 0;
+//            var old_val;
+            var size = jQuery("tr[data-tt-parent-id='" + parentIdLevel_1 + "']").size();
+            jQuery("tr[data-tt-parent-id='" + parentIdLevel_1 + "']").each(function() {
+                if (jQuery(this).find('td:first input').is(':checked') == true) {
+                    previous++;
+                }
+            });
+            if (size == previous && size > 0 && previous > 0) {
+                jQuery('tr#' + parentIdLevel_1 + ' td:first input').prop('checked', true);
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCss');
+            }
+//            alert(jQuery("tr[data-tt-parent-id='" + parentIdLevel_1 + "']").find('input[type=checkbox]:not(:checked)').length);
+//            }
+
+//            if (jQuery("tr[data-tt-parent-id='" + parentIdLevel_1 + "']").find(' td:first input').siblings(':checked')) {
+//                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCss');
+//            }
+            jQuery(selector).each(function() {
+                jQuery(this).prop('checked', true);
+                jQuery(this).attr('checked', 'checked');
+                jQuery(this).trigger('change');
+            });
+        } else {
+            jQuery(this).prop('checked', false);
+            jQuery(this).removeAttr('checked', false);
+            var parentIdLevel_2 = $(this).parents('tr').attr('data-tt-parent-id');
+            var parentIdLevel_1 = jQuery('tr#' + parentIdLevel_2).attr('data-tt-parent-id');
+            var count = 0;
+            jQuery("tr[data-tt-parent-id='" + parentIdLevel_2 + "']").each(function() {
+                if (jQuery(this).find('td:first input').is(':checked') == true) {
+                    count++;
+                }
+            });
+            if (count == 0) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('intermediateCheckBoxCss').removeClass('chkBoxCssChecked').addClass('unCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').removeAttr('checked', false);
+            }
+            else if (count < 4) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('chkBoxCss').addClass('intermediateCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('chkBoxCss').addClass('intermediateCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').removeAttr('checked', false);
+                jQuery('tr#' + parentIdLevel_1 + ' td:first input').removeAttr('checked', false);
+            }
+
+            jQuery(selector).each(function() {
+
+                jQuery(this).prop('checked', false);
+                jQuery(this).removeAttr('checked', false);
+                jQuery(this).trigger('change');
+            });
+        }
+    });
+</script>

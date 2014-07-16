@@ -1,0 +1,37 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$title = $this->translate('Groups');
+$this->headTitle($title);
+?>
+<script type="text/javascript">
+    var urlAddGroup = "<?php echo $this->url('group', array('action' => 'add', 'controller' => 'Group')); ?>";
+    var urlEditGroup = "<?php echo $this->url('group', array('action' => 'edit', 'controller' => 'Group')); ?>";
+</script>
+<div id="pageMainDiv">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <p>
+        <button onclick="javascript:loadPage(urlAddGroup);">Add New</button>
+        <button onclick="javascript:loadPage(urlAddGroup);">Print Preview</button>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        <?php
+        foreach ($this->Paginator as $Group)
+        {
+            ?>
+            <tr>
+                <td><?php echo @$counter; ?></td>
+                <td><?php echo $this->escapeHtml(@$Group->getName()); ?></td>
+                <td><a href="javascript:loadPage(urlEditGroup+ '/<?php echo @$Group->getId(); ?>');">Edit Branch</a></td>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+</div>

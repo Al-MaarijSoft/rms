@@ -1,0 +1,119 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js'); ?>
+<?php
+//echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+$title = $this->translate('List Of Allocation');
+$this->headTitle($title);
+$counter = 0;
+?>
+<script type="text/javascript">
+    var urlAllocateResources = "<?php echo $this->url('allocation', array('action' => 'allocate', 'controller' => 'Allocation')); ?>";
+    var urlEditAllocatedResources = "<?php echo $this->url('allocation', array('action' => 'edit', 'controller' => 'Allocation')); ?>";
+</script>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->escapeHtml($title); ?>
+        <div><button id="printprviewbtn" onclick="javascript:loadPage(urlAllocateResources);" title="Print Resources"></button></div>
+        <div><button id="addbtn" onclick="javascript:loadPage(urlAllocateResources);" title="Add Resouces"></button></div>
+    </div>
+    <div style="clear: both"></div>
+    <table class="tableCss">
+        <thead>
+            <tr>
+                <th>Resource Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($this->Paginator as $Role) :
+            $counter++;
+            $counterSub = 0;
+            if ($counter % 2)
+                $rowCss = 'oddRow';
+            else
+                $rowCss = 'evenRow';
+            ?>
+            <tr class="header <?php echo $rowCss; ?>">
+                <td><span>▼</span> <?php echo $Role->getName(); ?></td>
+                <td>
+                    <a href="javascript:loadPage(urlEditAllocatedResources+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_view.png" style="border: none;" border="0" title="View Record" /></a>
+                    &nbsp;&nbsp;
+                    <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/btn_edit.png" style="border: none;" border="0" title="Edit Record" /></a>
+                    &nbsp;&nbsp;
+                    <a href="javascript:loadPage(urlEditVoucher+ '/<?php echo $Role->getId(); ?>');"><img src="<?php echo $this->serverUrl(); ?>/img/delete.png" style="border: none;" border="0" title="Delete Record" /></a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <?php $Allocations = $Role->getResourceToRole(); ?>
+                    <table id="tblResourceList" class="tableCss">
+    <!--                        <thead>
+                            <tr>
+                                <th>Resource Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>-->
+                        <tbody>
+                            <?php
+                            foreach ($Allocations as $key => $Allocation):
+                                $counterSub++;
+                                if ($counterSub % 2)
+                                    $rowCss = 'oddRow';
+                                else
+                                    $rowCss = 'evenRow';
+                                ?>
+                                <tr class="<?php echo $rowCss; ?>"id="<?php echo $Allocation->getId(); ?>" data-tt-id="<?php echo $Allocation->getId(); ?>" <?php echo (is_object($Allocation->getResource()->getParent()) ? 'data-tt-parent-id="' . $Allocation->getResource()->getParent()->getId() . '"' : ''); ?>>
+                                    <td><?php echo $Allocation->getResource()->getName(); ?></td>
+                                    <td><?php
+                                        if (count($Allocation->getResource()->getChildren()))
+                                        {
+                                            echo "Allowed/Partially Allowed";
+                                        }
+                                        else
+                                        {
+                                            echo ($Allocation->getStatus() == 1 ? 'Allowed' : 'Not Allowed');
+                                        }
+                                        ?></td>
+                                </tr>
+                                <?php
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+<?php endforeach; ?>
+        <tfoot>
+            <tr>
+                <th colspan="2">&nbsp;</th>
+            </tr>    
+        </tfoot>
+
+    </table>
+
+    <div class="pagination">
+        <?php
+        echo $this->paginationControl(
+                $this->Paginator, 'sliding', array('partial/paginator.phtml', 'Voucher'), array(
+            'route' => 'voucher'
+                )
+        );
+        ?>
+    </div>
+
+</div>
+<script>
+
+    jQuery('.header').click(function() {
+        jQuery(this).find('span').text(function(_, value) {
+            return value == '▼' ? '►' : '▼'
+        });
+        jQuery(this).nextUntil('tr.header').slideToggle('slow', function() {
+        });
+    });</script>
+<script type="text/javascript">
+    jQuery("#tblResourceList").treetable({expandable: true, initialState: "expanded"});
+</script>
+

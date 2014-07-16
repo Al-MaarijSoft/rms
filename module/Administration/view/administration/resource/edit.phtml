@@ -1,0 +1,26 @@
+<?php
+//echo $this->headScript()->appendFile($this->basePath() . '/js/manufacturing.module.js');
+
+$title = 'Edit Resource';
+$this->headTitle($title);
+?>
+<div  id="pageMainDiv">
+    <fieldset>
+        <h3>
+            <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a></h3>
+        <div>
+            <?php
+            $Form = $this->Form;
+            $Form->setAttribute('action', $this->url('resource', array('action' => 'edit', 'controller' => 'Resource')));
+            $Form->prepare();
+            echo $this->form()->openTag($Form);
+            echo $this->formHidden($Form->get('id'));
+            echo $this->formRow($Form->get('parent'));
+            echo $this->formRow($Form->get('name'));
+            echo $this->formSubmit($Form->get('submit'));
+            echo $this->form()->closeTag();
+            print_r($Form->getMessages());
+            ?>
+        </div>
+    </fieldset>
+</div>

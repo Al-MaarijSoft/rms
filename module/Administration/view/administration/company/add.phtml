@@ -1,0 +1,97 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+
+$title = 'Add new Company';
+$this->headTitle($title);
+?>
+<div  id="pageMainDiv">
+    <div class="pageHeadingPanel"><?php echo $this->headTitle($title); ?></div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading"><legend><?php echo $this->escapeHtml($title); ?></legend></a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('name'));
+                    echo $this->formRow($Form->get('country'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('state'));
+                echo $this->formRow($Form->get('city'));
+                ?>
+                </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('zip_code'));
+                echo $this->formRow($Form->get('address'));
+                ?>
+                    </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('email'));
+                echo $this->formRow($Form->get('cell'));
+                ?>
+                    </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('phone1'));
+                echo $this->formRow($Form->get('phone2'));
+                ?>
+                    </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('fax'));
+                echo $this->formRow($Form->get('status'));
+                ?>
+                </div>
+                <div>
+                    <?php
+                echo $this->formRow($Form->get('description'));
+                ?>
+            </div>
+        </fieldset>
+    <div class="submit"> <?php echo $this->formSubmit($Form->get('submit')); ?></div>
+</div>
+</div>
+
+            echo $this->form()->openTag($Form);
+            echo $this->formHidden($Form->get('id'));
+            echo $this->formRow($Form->get('name'));
+            echo $this->formRow($Form->get('country'));
+            echo $this->formRow($Form->get('state'));
+            echo $this->formRow($Form->get('city'));
+            echo $this->formRow($Form->get('zip_code'));
+            echo $this->formRow($Form->get('address'));
+            echo $this->formRow($Form->get('email'));
+            echo $this->formRow($Form->get('cell'));
+            echo $this->formRow($Form->get('phone1'));
+            echo $this->formRow($Form->get('phone2'));
+            echo $this->formRow($Form->get('fax'));
+            echo $this->formRow($Form->get('status'));
+            echo $this->formRow($Form->get('description'));
+            echo $this->formSubmit($Form->get('submit'));
+            echo $this->form()->closeTag();
+            ?>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+    jQuery('select[name="country"]').change(function() {
+        var url = "<?php echo $this->url('company', array('action' => 'populateState', 'controller' => 'Company')) ?>";
+        url = url + '/' + jQuery('select[name="country"]').val();
+        populateSelectBox(url, 'country', 'state');
+
+    });
+    jQuery('select[name="state"]').change(function() {
+        var url = "<?php echo $this->url('company', array('action' => 'populateCity', 'controller' => 'Company')) ?>";
+        url = url + '/' + jQuery('select[name="state"]').val();
+        populateSelectBox(url, 'state', 'city');
+
+    });
+
+</script>

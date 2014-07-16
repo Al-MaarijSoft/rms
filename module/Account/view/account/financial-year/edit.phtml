@@ -1,0 +1,88 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/account.module.js');
+
+$title = 'Add new Financial Year';
+$Form = $this->Form;
+$Form->setAttribute('action', $this->url('financial_year', array('action' => 'edit', 'controller' => 'FinancialYear', 'id' => $this->id)));
+$Form->prepare();
+echo $this->form()->openTag($Form);
+echo $this->formHidden($Form->get('id'));
+?>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->headTitle($title); ?>
+        <div>
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlFinancialYear);" />
+            <input type="submit" value="Save" />
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div id ="accordion">
+        <fieldset>
+            <div>
+                <h3>
+                    <a href="#" class="accordionAnchorHeading">
+                        <legend><?php echo $this->escapeHtml($title); ?></legend></a>
+                </h3>
+                <div>
+                    <div>
+                        <?php
+                        echo $this->formRow($Form->get('start_date'));
+                        echo (isset($this->errorMsgs['start_date'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['start_date']) . '</span>' : '';
+                        echo $this->formRow($Form->get('end_date'));
+                        echo (isset($this->errorMsgs['end_date'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['end_date']) . '</span>' : '';
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        echo $this->formRow($Form->get('name'));
+                        echo (isset($this->errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['name']) . '</span>' : '';
+                        echo $this->formRow($Form->get('status'));
+                        echo (isset($this->errorMsgs['status'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['status']) . '</span>' : '';
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        echo $this->formRow($Form->get('is_current'));
+                        echo (isset($this->errorMsgs['is_current'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['is_current']) . '</span>' : '';
+                        ?>
+                    </div>
+                </div>
+        </fieldset>
+        <div class = "submit">
+            <input type="button" value="Cancel" onclick="javascript:loadPage(urlFinancialYear);" />
+            <?php echo $this->formSubmit($Form->get('submit'));
+            ?>
+        </div>
+    </div>
+</div>
+
+<?php
+echo $this->form()->closeTag();
+?>
+<script>
+                jQuery(document).ready(function() {
+                    jQuery("#accordion").accordion({
+                        header: "h3",
+                        autoheight: false,
+                        active: 0,
+                        alwaysOpen: false,
+                        fillspace: false,
+                        collapsible: true,
+                        heightStyle: "content"
+                                //heightStyle: content   //auto, fill, content
+                    });
+                    jQuery(function() {
+                        jQuery('[name="start_date"]').datepicker(dateFormater);
+                        jQuery('[name="end_date"]').datepicker(dateFormater);
+                    });
+                });
+
+                jQuery('input[name="start_date"]').change(function() {
+                    makeFinancialYear();
+                });
+                jQuery('input[name="end_date"]').change(function() {
+                    makeFinancialYear();
+                });
+
+</script>

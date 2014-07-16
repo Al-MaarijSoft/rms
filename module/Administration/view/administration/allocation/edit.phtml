@@ -1,0 +1,132 @@
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->basePath() ?>/css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $this->basePath() ?>/js/jquery.treetable.js"></script>
+<?php echo $this->headScript()->appendFile($this->basePath() . '/js/manufacturing.module.js'); ?>
+<?php
+$title = 'Allocate Resources';
+?>
+<form name="Allocate" method="post" action="<?php $this->url('allocation', array('action' => 'edit', 'controller' => 'Allocation')); ?>">
+    <div id="pageMainDiv">
+        <fieldset>
+            <legend>Basic Info</legend>
+            <label>
+                <span>Role Name:</span>
+            </label>  
+        </fieldset>
+        <fieldset>
+            <legend class="legendHeadingOfOtherIndexOfAccounts">Edit Allocate Resources:</legend>
+            <table id="tblAllocationList" class="tableCss" style="width: 30%">
+                <?php
+                $counter = 0;
+                $Allocations = $this->Roles->getResourceToRole();
+                foreach ($Allocations as $Allocation)
+                {
+                    $counter++;
+                    $counterSub = 0;
+                    if ($counter % 2)
+                        $rowCss = 'oddRow';
+                    else
+                        $rowCss = 'evenRow';
+                    ?>
+                    <tr id="<?php echo $Allocation->getResource()->getId(); ?>" data-tt-id="<?php echo $Allocation->getResource()->getId(); ?>" <?php echo (is_object($Allocation->getResource()->getParent()) ? 'data-tt-parent-id="' . $Allocation->getResource()->getParent()->getId() . '"' : 'class="noParent"'); ?>>
+                        <td class="chkBoxCss">
+                            <input type="checkbox" id="status-<?php echo $Allocation->getResource()->getId(); ?>"  style="display: none;" name="status[]" value="<?php echo $Allocation->getResource()->getId(); ?>" class="<?php echo (is_object($Allocation->getResource()->getParent()) ? 'cssParentId-' . $Allocation->getResource()->getParent()->getId() : ''); ?>" <?php if ($Allocation->getStatus() == 1) echo "checked='checked'"; ?>/>
+                            <label for="status-<?php echo $Allocation->getResource()->getId(); ?>">
+                                <span ></span>
+                                <?php echo @$Allocation->getResource()->getName(); ?>
+                            </label>
+                        </td>
+                    </tr>
+                <?php }; ?>
+            </table>
+            <input type="submit" name="submit" value="Allocate">
+        </fieldset>
+    </div>
+</form>
+<script>
+    jQuery(document).ready(function() {
+        jQuery("#tblAllocationList").treetable({expandable: true});
+        if (!jQuery('tr td:first:input:has(:checkbox:not(:checked))').length) {
+            jQuery('tr').find('td input').each(function() {
+                if (this.checked) {
+                    var parentIdLevel_2 = $(this).parents('tr').attr('data-tt-parent-id');
+                    var parentIdLevel_1 = jQuery('tr#' + parentIdLevel_2).attr('data-tt-parent-id');
+
+                    jQuery('tr#' + parentIdLevel_2 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+                    jQuery('tr#' + parentIdLevel_1 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+                }
+            });
+        }
+    });
+
+    jQuery('[id^="status-"]').change(function() {
+        var idValOfParent = jQuery(this).parents('tr').attr('data-tt-id');
+        var selector = 'input.cssParentId-' + idValOfParent;
+        var parentIdLevel_2 = $(this).parents('tr').attr('data-tt-parent-id');
+        var parentIdLevel_1 = jQuery('tr#' + parentIdLevel_2).attr('data-tt-parent-id');
+        //        var parentSubID = jQuery(this).parents('tr').attr('data-tt-parent-id');
+        if (this.checked) {
+
+            jQuery('tr#' + parentIdLevel_2 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+            jQuery('tr#' + parentIdLevel_1 + ' td:first').addClass('intermediateCheckBoxCss').removeClass('unCheckBoxCss');
+            var count = 0;
+            jQuery("tr[data-tt-parent-id='" + parentIdLevel_2 + "']").each(function() {
+                if (jQuery(this).find('td:first input').is(':checked') == true) {
+                    count++;
+                }
+            });
+            if (count == 4) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').attr('checked', 'checked');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCssChecked');
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('chkBoxCss');
+            } else if (count < 4 && count > 0) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('chkBoxCss');
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('chkBoxCss');
+
+            }
+            jQuery(selector).each(function() {
+                jQuery(this).prop('checked', true);
+                jQuery(this).attr('checked', 'checked');
+                jQuery(this).trigger('change');
+            });
+        } else {
+            jQuery(this).prop('checked', false);
+            jQuery(this).removeAttr('checked', false);
+            var parentIdLevel_2 = $(this).parents('tr').attr('data-tt-parent-id');
+            var parentIdLevel_1 = jQuery('tr#' + parentIdLevel_2).attr('data-tt-parent-id');
+            var count = 0;
+            jQuery("tr[data-tt-parent-id='" + parentIdLevel_2 + "']").each(function() {
+                if (jQuery(this).find('td:first input').is(':checked') == true) {
+                    count++;
+                }
+            });
+            if (count == 0) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('intermediateCheckBoxCss').addClass('unCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').removeAttr('checked', false);
+            }
+            else if (count < 4) {
+                jQuery('tr#' + parentIdLevel_2 + ' td:first').removeClass('chkBoxCss').addClass('intermediateCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_1 + ' td:first').removeClass('chkBoxCss').addClass('intermediateCheckBoxCss');
+                jQuery('tr#' + parentIdLevel_2 + ' td:first input').removeAttr('checked', false);
+                jQuery('tr#' + parentIdLevel_1 + ' td:first input').removeAttr('checked', false);
+            }
+
+            jQuery(selector).each(function() {
+                jQuery(this).prop('checked', false);
+                jQuery(this).removeAttr('checked', false);
+                jQuery(this).trigger('change');
+            });
+        }
+
+//        jQuery(parentIdLevel_1).each(function() {
+//            jQuery(this).prop('checked', false);
+//            jQuery(this).removeAttr('checked', false);
+//            jQuery(this).trigger('change');
+//        });
+//        alert(jQuery('tr#'+parentIdLevel_2).find("input:has(:checkbox:not(:checked)").length);
+//        if (jQuery('tr#' + parentIdLevel_2).find("input:checked").length > 0)
+//        {
+//            alert('i am here');
+//        }
+    });
+</script>

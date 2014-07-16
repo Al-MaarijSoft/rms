@@ -1,0 +1,19 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/js/administration.module.js');
+$Form = $this->Form;
+?>
+<div id="pageMainDiv">
+    <h1><?php echo 'Edit ' . $Form->get('name')->getValue(); ?></h1>
+    <?php
+    $Form->setAttribute('action', $this->url('group', array('action' => 'edit', 'controller' => 'Group', 'id' => $this->id)));
+    $Form->prepare();
+
+    echo $this->form()->openTag($Form);
+    echo $this->formHidden($Form->get('id'));
+    echo $this->formRow($Form->get('name'));
+    echo (isset($errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($errorMsgs['name']) . '</span>' : '';
+    echo $this->formSubmit($Form->get('submit'));
+    echo $this->form()->closeTag();
+    print_r($Form->getMessages());
+    ?>
+</div>

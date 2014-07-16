@@ -1,0 +1,159 @@
+<?php
+ob_start();
+
+echo $this->doctype();
+$title = $this->translate('Reports Viewer');
+$counter = 0;
+?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <!-- Start Header -->
+        <title><?php echo $title ?></title>
+        <link type="text/css" rel="stylesheet" media="all" href="<?php echo $this->baseUrl . '/css/style.css'; ?>" >
+        <!-- End Header -->
+    </head>
+    <body>
+        <div id="loadingImgDiv" class="loadingDivCss"><img src="<?php echo $this->basePath('/img/loading.gif'); ?>" /></div>
+        <div id="containerDiv" class="printViewContainer">
+            <!--            <div class="printViewPageTopPanelContainer">
+                            <div class="printViewLogoCss"><img src="<?php // echo $this->basePath()               ?>/img/logo.png" /></div>
+                            <div class="printViewTopHeadDataRightSide"><span>Dated:&nbsp;&nbsp;</span><span><?php echo date('d-M-Y'); ?></span></div>
+                            <div class="printViewHeading"><?php // echo $this->headTitle($title);               ?></div>
+                            <div class="printViewTopHeadDataRightSide"><button class="printMe" title="">Print Report</button></div>
+                        </div>-->
+            <div id="printViewPageMainDiv">
+                <?php
+                foreach ($this->Vouchers as $Voucher) :
+                    $counter++;
+                    $counterSub = 0;
+                    if ($counter % 2)
+                        $rowCss = 'oddRow';
+                    else
+                        $rowCss = 'evenRow';
+                    $VrDetails = $Voucher->getVoucherDetails();
+                    ?>
+                    <div style="clear: both;"></div>
+                    <div class="reportViewerBody" style="page-break-after: always;">
+                        <div class="reportHeadingContainerDiv">
+                            <div class="rptLeftSideHeading">
+                                <?php if ($Voucher->getVoucherType()->getId() === \Account\Entity\VoucherType::BANK_PAYMENT_VOUCHER xor $Voucher->getVoucherType()->getId() === \Account\Entity\VoucherType::BANK_TO_BANK_TRANSFER): ?>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportOdd">Chq. No:</div>
+                                        <div class="vrReportColumn vrReportOdd"><?php echo $Voucher->getChequeNumber(); ?></div>
+                                    </div>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportEven">Chq. Date:</div>
+                                        <div class="vrReportColumn vrReportEven"><?php echo (($Voucher->getChequeDate()) ? $Voucher->getChequeDate()->format(Application\Library\Application::DATE_FORMAT) : ''); ?></div>
+                                    </div>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportOdd"></div>
+                                        <div class="vrReportColumn vrReportOdd"></div>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportOdd">Chq. No:</div>
+                                        <div class="vrReportColumn vrReportOdd"></div>
+                                    </div>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportEven">Chq. Date:</div>
+                                        <div class="vrReportColumn vrReportEven"></div>
+                                    </div>
+                                    <div class="vrReportRow">
+                                        <div class="vrReportHeadColumn vrReportOdd"></div>
+                                        <div class="vrReportColumn vrReportOdd"></div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="rptCenterHeading">
+                                <div class="reportLogoInCenter"></div>
+                            </div>
+                            <div class="rptRightHeading">
+                                <div class="vrReportRow">
+                                    <div class="vrReportHeadColumn vrReportOdd">Vr. Date:</div>
+                                    <div class="vrReportColumn vrReportOdd"><?php echo $Voucher->getVoucherDate()->format(\Application\Library\Application::DATE_FORMAT); ?></div>
+                                </div>
+                                <div class="vrReportRow">
+                                    <div class="vrReportHeadColumn vrReportEven">Vr. Type:</div>
+                                    <div class="vrReportColumn vrReportEven"><?php echo $Voucher->getVoucherType()->getName(); ?></div>
+                                </div>
+                                <div class="vrReportRow">
+                                    <div class="vrReportHeadColumn vrReportOdd">Vr. No:</div>
+                                    <div class="vrReportColumn vrReportOdd"><?php echo $Voucher->getVoucherNumber(); ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vrReportParticularsTableDiv">
+                            <table class="rptTableCss" style="table-layout:fixed; float: left;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 29%;">Particulars</th>
+                                        <th style="width: 55%;">Narration</th>
+                                        <th style="width: 8%;">Debit</th>
+                                        <th style="width: 8%;">Credit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $totalDebit = 0;
+                                    $totalCredit = 0;
+                                    foreach ($VrDetails as $key => $VrDetail):
+                                        $counterSub++;
+                                        if ($counterSub % 2)
+                                            $rowCss = 'oddRow';
+                                        else
+                                            $rowCss = 'evenRow';
+                                        $totalDebit += $VrDetail->getDebit();
+                                        $totalCredit += $VrDetail->getCredit();
+                                        ?>
+                                        <tr class="<?php echo $rowCss; ?>">
+                                            <td><?php echo $VrDetail->getAccount()->getName() . ' [' . $VrDetail->getAccount()->getCode() . ']'; ?></td>
+                                            <td><?php echo $VrDetail->getNarration(); ?></td>
+                                            <td style="text-align: right;"><?php echo ($VrDetail->getDebit() ? $VrDetail->getDebit() : 0); ?></td>
+                                            <td style="text-align: right;"><?php echo ($VrDetail->getCredit() ? $VrDetail->getCredit() : 0); ?></td>
+                                        </tr>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                    <tr class="<?php echo $rowCss == 'evenRow' ? 'oddRow' : 'evenRow'; ?>">
+                                        <td colspan="2" style="text-align: right; border-top: 2px #333333 double;">Total Amount:</td>
+                                        <td style="text-align: right; border-top: 2px #333333 double;"><?php echo $totalDebit; ?></td>
+                                        <td style="text-align: right; border-top: 2px #333333 double;"><?php echo $totalCredit; ?></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" style="text-align: left;color: #02355A;border: 1px solid #333333;background: #fff;"><b>Amount in Words:</b>  <?php echo \Application\Library\Application::convertNumberInWord($totalCredit) . ' ' . \Application\Library\Application::CURRENCY_IN_WORD; ?> Only</td>
+                                    </tr>    
+                                    <tr>
+                                        <th colspan="4" class="vrSignatureTd" style="background: #fff; color: #02355A;">
+                                            <span>Received By</span>
+                                            <span>Prepared By</span>
+                                            <span>Checked By</span>
+                                            <span>Finance Secretary</span>
+                                            <span>General Secretary/President</span>
+                                        </th>
+                                    </tr>    
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <?php
+                endforeach;
+                ?>
+            </div>
+        </div> <!-- /container -->
+    </body>
+</html>
+<?php
+$html = ob_get_clean();
+//================================================
+//$exec = \exec('wkhtmltopdf '.$html);
+//echo $exec;
+//==================================================
+//
+//echo $html;
+$this->Pdf->addPage($html);
+$this->Pdf->send();
+?>

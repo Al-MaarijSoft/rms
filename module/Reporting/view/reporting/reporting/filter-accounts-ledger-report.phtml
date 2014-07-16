@@ -1,0 +1,128 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath('/js/account.module.js'));
+echo $this->headScript()->appendFile($this->basePath('/js/autocomplete-combo.js'));
+$title = $this->translate('Filter Account Ledger Report');
+$counter = 0;
+?>
+<script type="text/javascript">
+    var urlShowSimpleVoucherReport = "<?php echo $this->url('reporting', array('action' => 'showSimpleVoucherReport', 'controller' => 'Reporting')); ?>";
+    var urlShowPdfAccountLedgerReport = "<?php echo $this->url('reporting', array('action' => 'showPdfAccountLedgerReport', 'controller' => 'Reporting')); ?>";
+    var urlFilterAccountsLedgerReport = "<?php echo $this->url('reporting', array('action' => 'filterAccountsLedgerReport', 'controller' => 'Reporting')); ?>";
+</script>
+<div id="pageMainDiv">
+    <div class="pageHeadingPanel">
+        <?php echo $this->headTitle($title); ?>
+        <div id="msgTextDiv"></div>
+        <div><button id="pdfBtn"></button></div>
+        <!--<div><button id="excelBtn" onclick="javascript:loadPageInNewWindow(urlVoucherAdd);"></button></div>-->
+        <!--<div><button id="printprviewbtn" onclick="javascript:loadPageInNewWindow(urlPrintVoucher);" title="Print Report"></button></div>-->
+    </div>
+    <div style="clear: both"></div>
+    <?php
+    if($this->errorMessages):
+        $this->errorMessages;
+    endif;
+    $Form = $this->Form;
+    $Form->setAttribute('action', $this->url('reporting', array('action' => 'filterAccountsLedgerReport', 'controller' => 'reporting')));
+    $Form->prepare();
+    echo $this->form()->openTag($Form);
+    echo $this->formHidden($Form->get('id'));
+    ?>
+    <div id ="accordion">
+        <fieldset>
+            <h3>
+                <a href="#" class="accordionAnchorHeading">
+                    <legend>Search Panel</legend>
+                </a>
+            </h3>
+            <div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('start_date'));
+                    echo $this->formRow($Form->get('end_date'));
+                    ?>
+                </div>
+                <div>
+                    <?php
+                    echo $this->formRow($Form->get('from_account'));
+                    echo $this->formRow($Form->get('to_account'));
+                    ?>
+                </div>
+                <div>
+                    <label class="lblBtnContainer">
+                        <input type="button" onclick="refreshPage(urlFilterAccountsLedgerReport);" value="Refresh" />
+                        <?php // echo $this->formSubmit($Form->get('voucherSimpleReport')); ?>
+                        <?php echo $this->formSubmit($Form->get('accountLedgerPdfReport')); ?>
+                    </label>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </div>
+    <?php
+    echo $this->form()->closeTag();
+//                        print_r($Form->getMessages());
+    ?>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+
+        jQuery(function() {
+            jQuery('[name="start_date"]').datepicker(dateFormater);
+        });
+        jQuery(function() {
+            jQuery('[name="end_date"]').datepicker(dateFormater);
+        });
+        $("#accordion").accordion({
+            header: "h3",
+            autoheight: false,
+            active: 0,
+            alwaysOpen: false,
+            fillspace: false,
+            collapsible: true,
+            heightStyle: "content" //heightStyle: content   //auto, fill, content
+        });
+        //***************************Check which Submit button is clicked
+        jQuery('#voucherSimpleReport, #accountLedgerPdfReport').click(function() {
+            if (this.id === 'voucherSimpleReport') {
+                submitBtnsVals.value = 'Simple Report';
+                urlAction = urlShowSimpleVoucherReport;
+            }
+            else if (this.id === 'accountLedgerPdfReport') {
+                submitBtnsVals.value = 'Pdf Report';
+                urlAction = urlShowPdfAccountLedgerReport;
+            }
+        });
+        //***************************Start Form Submit Event
+        jQuery('form').submit(function(event) {
+            event.preventDefault();
+//            postSubmitData(urlFilterAccountsLedgerReport, 'AccountLedgerReporting');
+            postSubmitDataAndLoadReportViewer(urlFilterAccountsLedgerReport, 'AccountLedgerReporting', urlAction);
+        });
+        //**********End Form Submit Event
+        //Time Interval Functions
+        setInterval('hideMsgText()', 20000);
+        //=======================================================
+        jQuery('#pdfBtn').click(function() {
+            urlAction = urlShowPdfAccountLedgerReport;
+//            event.preventDefault();
+            jQuery('form').trigger('submit');
+        });
+        //========================================================
+        jQuery(function() {
+            jQuery('[name="from_account"]').combobox();
+            jQuery("#toggle").click(function() {
+                jQuery('[name="from_account"]').toggle();
+            });
+        });
+        //========================================================
+        jQuery(function() {
+            jQuery('[name="to_account"]').combobox();
+            jQuery("#toggle").click(function() {
+                jQuery('[name="to_account"]').toggle();
+            });
+        });
+    });
+</script>
