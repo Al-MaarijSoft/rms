@@ -13,14 +13,11 @@ $this->headLink()->appendStylesheet('/fancybox/jquery.fancybox.css?v=2.1.5');
 <!--<script type="text/javascript" src="./fancybox/jquery.fancybox.js?v=2.1.5"></script>-->
 <!--<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />-->
 
-<a id="various2" class="fancybox" href="
-   <?php
+<a id="various2" class="fancybox fancybox.ajax" title="Start for free" href="<?php
    echo $this->url('website', array(
     'action' => 'signup',
 ));
-   ?>
-   
-   ">Ajax Fancybox</a>
+   ?>">Ajax Fancybox</a>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".fancybox").fancybox();

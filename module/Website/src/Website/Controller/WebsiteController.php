@@ -39,9 +39,14 @@ class WebsiteController extends AbstractActionController
     }
     
     public function signupAction(){
+        $Request = $this->getRequest();
+        $ViewModel = new ViewModel();
+        if ($Request->isXmlHttpRequest())
+        {
+            $ViewModel->setTerminal(true);
+        }
         $layout = $this->layout();
          $layout->setTemplate('layout/layout.phtml');
-         $ViewModel = new ViewModel();
         return $ViewModel;
     }
     
