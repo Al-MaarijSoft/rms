@@ -23,6 +23,7 @@
                 ->prependStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery.ui.datepicker.css')
                 ->prependStylesheet($this->basePath() . '/css/flexnav.css')
                 ->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+                ->prependStylesheet($this->basePath() . '/fancybox/jquery.fancybox.css?v=2.1.5')
 //        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery-ui.css')
 //        ->appendStylesheet($this->basePath() . '/css/themes/ui-lightness/jquery.ui.datepicker.css')
         ?>
@@ -30,11 +31,13 @@
         <!-- Scripts -->
         <?php
         echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath('/fancybox/jquery.fancybox.js?v=2.1.5'))
                 ->prependFile($this->basePath('/js/all.js'))
                 ->prependFile($this->basePath('/js/bootstrap.js'))
                 ->prependFile($this->basePath('/js/jquery.flexnav.js'))
                 ->prependFile($this->basePath('/js/jquery-ui.js'))
-                ->prependFile($this->basePath('/js/jquery.min.js'));
+                ->prependFile($this->basePath('/js/jquery.min.js'))
+                ;
         ?>
         <!-- End Header -->
     </head>
