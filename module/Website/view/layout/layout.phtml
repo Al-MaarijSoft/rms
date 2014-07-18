@@ -78,7 +78,7 @@
                                 <a href="#contact">CHECK A DEMO</a>
                             </li>
                             <li>
-                                <a href="#contact">CREATE NEW ACCOUNT</a>
+                                <a  class="fancybox fancybox.ajax" href="<?php echo $this->url('website', array('action' => 'signup'))  ?>" title="Ccreate New Account">CREATE NEW ACCOUNT</a>
                             </li>
 <!--                            <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
@@ -146,7 +146,10 @@
         <?php echo $this->inlineScript() ?>
     </body>
 
-    <script>
+    <script type="text/javascript">
         //****************************Set Ajax On navigation Links
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    })
     </script>
 </html>
