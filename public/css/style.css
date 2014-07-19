@@ -1420,30 +1420,43 @@ span.uploadeFileWrapper a:hover img { border:6px solid #CCC;-moz-border-radius:5
     border-radius: 4px;
 }
 .schoolCommunity{
-    background: url('/img/school-community.png') no-repeat center center;
+    background: url('/img/school-community.png') no-repeat top center;
     color: #0b2073;
     font-size: 13px;
-    border: 1px #737a7a dotted;
+    border: 2px #E7E7E7 dotted;
     border-radius: 4px; 
     cursor: pointer;
 }
 .schoolCommunity:hover{
     /*background: url('/img/school-community-hover.png') rgba(46, 169, 223, 0);*/
-    background: url('/img/school-community-hover.png') center center no-repeat #0b2073;
+    background: url('/img/school-community-hover.png') top center no-repeat #0b2073;
     color: #fff;
 }
 .manufecturalCommunity{
-    background: url('/img/manufectural-community.png') no-repeat center center;
+    background: url('/img/manufectural-community.png') no-repeat top center;
     color: #b64253;
     font-size: 13px;
-    border: 1px #737a7a dotted;
+    border: 2px #E7E7E7 dotted;
     border-radius: 4px; 
     cursor: pointer;
 }
 .manufecturalCommunity:hover{
     /*background: url('/img/school-community-hover.png') rgba(46, 169, 223, 0);*/
-    background: url('/img/manufectural-community-hover.png') center center no-repeat #b64253;
+    background: url('/img/manufectural-community-hover.png') top center no-repeat #b64253;
     color: #fff;
+}
+div.newsContainers{
+    border: 2px #E7E7E7 dotted;
+}
+div.newsContainers ul.news{
+    color: #708090;
+    margin: 10px 0 0 0px;
+}
+div.newsContainers ul.news li{
+    margin: 5px 0 5px 5px;
+}
+div.newsContainers ul.news li ul li{
+    margin: 5px 0 5px 15px;
 }
 /* ================== End WebSite Home ======================= */
 
@@ -1460,12 +1473,20 @@ span.uploadeFileWrapper a:hover img { border:6px solid #CCC;-moz-border-radius:5
 /* ================== Start GENERAL ======================= */
 
 /* ======== Floats =========*/
+.dB{display: block;}
+.dN{display: none;}
+.dLb{display: inline-block;}
+.dL{display: inline;}
+
+
+/* ======== Floats =========*/
 .fL{float: left;}
 .fR{float: right;}
 .fN{float: none;}
 .fT{float: top;}
 
 /* ======== Text-Aligns =========*/
+.taL{text-align: left;}
 .taC{text-align: center;}
 .taJ{text-align: justify;}
 
@@ -1473,46 +1494,76 @@ span.uploadeFileWrapper a:hover img { border:6px solid #CCC;-moz-border-radius:5
 .cSC{color: #0b2073;}
 .cP{color: #8147a0;}
 .cG1{color: #708090;}
+.cGr1{color: #478409;}
+
+.cW0{color: #fff;}
+.cW1{color: #F9F9F9;}
+.cW5{color: #C2C2C2;}
 
 /* ======== Backgrounds =========*/
 .bg-SC{width: 141px;height: 84px;background: url('/img/school-community.png') no-repeat center center;}
-.bgC-DM{background-color: #2b073e;}
+.bgC-Dm{background-color: #2b073e;}
 
 .bgC-W0{background-color: #fff;}
 .bgC-W1{background-color: #F9F9F9;}
 .bgC-W2{background-color: #F8F8F8;}
 .bgC-W3{background-color: #E7E7E7;}
+.bgC-W5{background-color: #C2C2C2;}
 
 /* ======== Borders =========*/
 .no-b{border: 1px solid #2b073e;}
 
 .bRd4{border-radius: 4px}
 
-.b1{border: 1px solid #2b073e;}
+.b1S-Dm{border: 1px solid #2b073e;}
+
+.b3S-W3{border: 3px solid #E7E7E7;}
+
+.b3S-Gr1{border: 3px solid #478409;}
 
 /* ======== Paddings =========*/
 .p15{padding: 15px;}
 .p20{padding: 20px;}
 
+.pT10{padding-top: 10px;}
+
 .pL10{padding-left: 10px;}
+.pL15{padding-left: 15px;}
 .pL20{padding-left: 20px;}
 
 
 /* ======== Margins =========*/
+.m5{margin: 5px;}
+.m10{margin: 10px;}
+.m15{margin: 15px;}
+
+.mT5{margin-top: 5px;}
+.mT10{margin-top: 10px;}
 .mT15{margin-top: 15px;}
 .mT20{margin-top: 20px;}
 .mT50{margin-top: 50px !important;}
+.mT60{margin-top: 60px;}
+.mT70{margin-top: 70px;}
+.mT80{margin-top: 80px;}
+.mT90{margin-top: 90px;}
 
 .mR50{margin-right: 50px !important;}
 
+.mL-15{margin-left: -15px;}
 .mL7{margin-left: 7px;}
 .mL10{margin-left: 10px;}
 .mL30{margin-left: 30px;}
 .mL50{margin-left: 50px;}
 
 /* ======== Widths =========*/
+.w95p{width: 95%;}
+.w100p{width: 100%;}
+
 .w141{width: 141px;}
+.w165{width: 165px;}
 
 /* ======== Heights =========*/
+.h50{height: 50px;}
 .h84{height: 84px;}
+.h115{height: 115px;}
 /* ================== End GENERAL ======================= */
