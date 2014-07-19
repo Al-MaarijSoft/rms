@@ -1406,11 +1406,113 @@ span.uploadeFileWrapper a:hover img { border:6px solid #CCC;-moz-border-radius:5
 .rptRowRight{
     float: right;
 }
-/* ========================================= */
-.mr50{
-    margin-right: 50px !important;
-}
 
-.ml50{
-    margin-left: 50px;
+/* ================== Start WebSite Home ======================= */
+.home-bg{
+    height: 335px;
+    background: url('/img/erp-banner-img01.png') no-repeat 
 }
+.communityBox{
+    /*color: #478409;*/
+    color: #8147a0;
+    text-align: center;
+    padding: 20px;
+    border-radius: 4px;
+}
+.schoolCommunity{
+    background: url('/img/school-community.png') no-repeat center center;
+    color: #0b2073;
+    font-size: 13px;
+    border: 1px #737a7a dotted;
+    border-radius: 4px; 
+    cursor: pointer;
+}
+.schoolCommunity:hover{
+    /*background: url('/img/school-community-hover.png') rgba(46, 169, 223, 0);*/
+    background: url('/img/school-community-hover.png') center center no-repeat #0b2073;
+    color: #fff;
+}
+.manufecturalCommunity{
+    background: url('/img/manufectural-community.png') no-repeat center center;
+    color: #b64253;
+    font-size: 13px;
+    border: 1px #737a7a dotted;
+    border-radius: 4px; 
+    cursor: pointer;
+}
+.manufecturalCommunity:hover{
+    /*background: url('/img/school-community-hover.png') rgba(46, 169, 223, 0);*/
+    background: url('/img/manufectural-community-hover.png') center center no-repeat #b64253;
+    color: #fff;
+}
+/* ================== End WebSite Home ======================= */
+
+/* ================== Start WebSite-Layout ======================= */
+#containerDiv{
+    padding: 0px;
+}
+.navbar{
+    margin-bottom: 0px;
+    border: none;
+}
+/* ================== Start WebSite-Layout ======================= */
+
+/* ================== Start GENERAL ======================= */
+
+/* ======== Floats =========*/
+.fL{float: left;}
+.fR{float: right;}
+.fN{float: none;}
+.fT{float: top;}
+
+/* ======== Text-Aligns =========*/
+.taC{text-align: center;}
+.taJ{text-align: justify;}
+
+/* ======== colors =========*/
+.cSC{color: #0b2073;}
+.cP{color: #8147a0;}
+.cG1{color: #708090;}
+
+/* ======== Backgrounds =========*/
+.bg-SC{width: 141px;height: 84px;background: url('/img/school-community.png') no-repeat center center;}
+.bgC-DM{background-color: #2b073e;}
+
+.bgC-W0{background-color: #fff;}
+.bgC-W1{background-color: #F9F9F9;}
+.bgC-W2{background-color: #F8F8F8;}
+.bgC-W3{background-color: #E7E7E7;}
+
+/* ======== Borders =========*/
+.no-b{border: 1px solid #2b073e;}
+
+.bRd4{border-radius: 4px}
+
+.b1{border: 1px solid #2b073e;}
+
+/* ======== Paddings =========*/
+.p15{padding: 15px;}
+.p20{padding: 20px;}
+
+.pL10{padding-left: 10px;}
+.pL20{padding-left: 20px;}
+
+
+/* ======== Margins =========*/
+.mT15{margin-top: 15px;}
+.mT20{margin-top: 20px;}
+.mT50{margin-top: 50px !important;}
+
+.mR50{margin-right: 50px !important;}
+
+.mL7{margin-left: 7px;}
+.mL10{margin-left: 10px;}
+.mL30{margin-left: 30px;}
+.mL50{margin-left: 50px;}
+
+/* ======== Widths =========*/
+.w141{width: 141px;}
+
+/* ======== Heights =========*/
+.h84{height: 84px;}
+/* ================== End GENERAL ======================= */

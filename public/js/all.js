@@ -538,3 +538,15 @@ function myCloseAlert()
 {
     jQuery('#alertBoxDiv').hide();
 }
+function isScrollBarAtEnd(docContext,winContext){
+//    var docHeight = $(document).height();
+//    var scrollAndWinHieght = $(window).scrollTop() + $(window).height();
+//******************************************************    
+    var docHeight = $(docContext).height();
+    var scrollPlusWinHeight = $(winContext).scrollTop() + $(winContext).height();
+    if(docHeight === scrollPlusWinHeight){
+        return true;
+    }else{
+        return false;
+    }
+}
