@@ -13,7 +13,7 @@ return array(
             'login' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route' => '/login',
+                    'route' => '/administration/login',
                     'defaults' => array(
                         'controller' => 'Administration\Controller\Administration',
                         'action' => 'login',

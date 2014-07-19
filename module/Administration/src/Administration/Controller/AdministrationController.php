@@ -59,7 +59,8 @@ class AdministrationController extends AbstractActionController
             {
                 $identity = $authResult->getIdentity();
                 $AuthService->getStorage()->write($identity);
-                return $this->redirect()->toRoute('home');
+//                return $this->redirect()->toRoute('home');
+                return $this->redirect()->toRoute('account');
             }
             else
             {
