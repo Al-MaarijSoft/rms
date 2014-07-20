@@ -33,7 +33,20 @@ return array(
         'template_path_stack' => array(
             'website' => __DIR__ . '/../view',
         ),
-    ), 
+    ),
+    // --------- Start Module Specific Layout
+    'module_layouts' => array(
+//      'Album' => array(
+//          'default' => 'layout/album',
+//          'edit'    => 'layout/albumEdit',
+//        ),
+      'Website' => array(
+          'default' => 'layout/website',
+//          'edit'    => 'layout/albumEdit',
+        )
+     ),
+    // --------- End Module Specific Layout
+    
     // --------- Doctrine Settings For the Module
     'doctrine' => array(
         'driver' => array(

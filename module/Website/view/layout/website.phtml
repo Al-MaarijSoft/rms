@@ -6,8 +6,12 @@
         <meta charset="utf-8">
         <!-- Start Header -->
         <script type="text/javascript">
-            //********************** CONSTANTS
-
+            //********************** START CONSTANTS
+            //********************** END CONSTANTS
+            
+            //********************** START VARIABLES
+//            var urlAboutUs = "<?php // echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website')) ?>";
+            //********************** END VARIABLES
 
         </script>
         <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
@@ -52,7 +56,7 @@
         <!-- ========================================= Start Top-Nav Menu and Top Container ====================================================== -->
         <div id="topBarContainer" class="navbar navbar-default navbar-static-top webTopContainer" role="navigation">
                 <div class="container">
-                    <div class="webLogoCss" >&nbsp;</div>
+                    <div class="webLogoCss mT20" >&nbsp;</div>
                     <div class="webRightVectorBg fR" >&nbsp;</div>
                 </div>
                 <div id="topNavContainer" class="container bgC-Dm">
@@ -66,9 +70,9 @@
                         <!--<a class="navbar-brand" href="#">Project name</a>-->
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav mL50">
-                            <li class="active"><a href="#">HOME</a></li>
-                            <li><a href="#about">ABOUT US</a></li>
+                        <ul class="nav navbar-nav navAjaxLink">
+                            <li class="active"><a href="<?php echo $this->url('website', array('action' => 'index', 'controller' => 'Website')) ?>">HOME</a></li>
+                            <li><a href="<?php echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website')) ?>">ABOUT US</a></li>
                             <li>
                                 <a href="#contact">RMS FEATURES</a>
                             </li>
@@ -99,7 +103,7 @@
                                 </ul>
                             </li>-->
                         </ul>
-                        <ul class="nav navbar-nav navbar-right mR50">
+                        <ul class="nav navbar-nav navbar-right mR5i">
 <!--                            <li><a href="../navbar/">Default</a></li>
                             <li><a href="../navbar-static-top/">Static top</a></li>
                             <li class="active"><a href="./">Fixed top</a></li>-->
@@ -146,7 +150,14 @@
     </body>
 
     <script>
-        
+        //****************************Set Ajax On navigation Links
+        jQuery('.navAjaxLink a').click(function(event) {
+            event.preventDefault();
+            var url = jQuery(this).attr('href');
+//            alert(url);
+            if (url !== '#')
+                loadPage(url);
+        });
         //****************************Start Scroll Event For MenuBar Effect
         jQuery(window).scroll(function (){
             var topBarContainer = jQuery('#topBarContainer');
