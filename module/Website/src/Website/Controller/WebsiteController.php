@@ -26,15 +26,10 @@ use Zend\View\Model\ViewModel;
 
 class WebsiteController extends AbstractActionController
 {
-    function __construct() {
-        $layout = $this->layout();
-        $layout->setTemplate('layout/layout.phtml');
-    }
-
     public function indexAction()
     {
-        $layout = $this->layout();
-        $layout->setTemplate('layout/layout.phtml');
+//        $layout = $this->layout();
+//        $layout->setTemplate('layout/layout.phtml');
         $ViewModel = new ViewModel();
         $Request = $this->getRequest();
         if ($Request->isXmlHttpRequest())
@@ -55,8 +50,16 @@ class WebsiteController extends AbstractActionController
     }
     
     public function aboutUsAction(){
-//        $layout = $this->layout();
-//        $layout->setTemplate('layout/layout.phtml');
+        $Request = $this->getRequest();
+        $ViewModel = new ViewModel();
+        if ($Request->isXmlHttpRequest())
+        {
+            $ViewModel->setTerminal(true);
+        }
+        return $ViewModel;
+    }
+    
+    public function rmsFeatureAction(){
         $Request = $this->getRequest();
         $ViewModel = new ViewModel();
         if ($Request->isXmlHttpRequest())
