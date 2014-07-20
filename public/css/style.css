@@ -1490,11 +1490,18 @@ div.newsContainers ul.news li ul li{
 
 /* ================== Start GENERAL ======================= */
 
-/* ======== Floats =========*/
+/* ======== Displaies =========*/
 .dB{display: block;}
 .dN{display: none;}
 .dLb{display: inline-block;}
 .dL{display: inline;}
+
+
+/* ======== Font Bolds and  Sizes =========*/
+.fntB{font-weight: bold;}
+.fntS13{font-size: 13px;}
+.fntS15{font-size: 15px;}
+
 
 
 /* ======== Floats =========*/
@@ -1547,6 +1554,7 @@ div.newsContainers ul.news li ul li{
 .p15{padding: 15px;}
 .p20{padding: 20px;}
 
+.pT5{padding-top: 5px;}
 .pT10{padding-top: 10px;}
 .pT20{padding-top: 20px;}
 .pT30{padding-top: 30px;}
@@ -1556,6 +1564,7 @@ div.newsContainers ul.news li ul li{
 .pL10{padding-left: 10px;}
 .pL15{padding-left: 15px;}
 .pL20{padding-left: 20px;}
+.pL100{padding-left: 100px;}
 
 
 /* ======== Margins =========*/
