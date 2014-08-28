@@ -18,6 +18,11 @@ use Doctrine\ORM\Mapping as ORM,
  * @property string $description
  * @property datetime $creation_date
  * @property datetime $modification_date
+ * @property string $email
+ * @property string $website
+ * @property string $contact_person
+ * @property string $contact_number
+ * @property string $community
  * 
  */
 class Company
@@ -40,6 +45,75 @@ class Company
      */
     protected $name;
 
+    /**
+     * @ORM\Column(type="string", length=50, unique=true, nullable=false)
+     * 
+     */public function getEmail() {
+        return $this->email;
+    }
+
+    public function getWebsite() {
+        return $this->website;
+    }
+
+    public function getContactPerson() {
+        return $this->contact_person;
+    }
+
+    public function getContactNumber() {
+        return $this->contact_number;
+    }
+
+    public function getCommunity() {
+        return $this->community;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    public function setWebsite($website) {
+        $this->website = $website;
+    }
+
+    public function setContact_person($contact_person) {
+        $this->contact_person = $contact_person;
+    }
+
+    public function setContact_number($contact_number) {
+        $this->contact_number = $contact_number;
+    }
+
+    public function setCommunity($community) {
+        $this->community = $community;
+    }
+
+        protected $email;
+    
+    /**
+     * @ORM\Column(type="string", length=50, unique=true, nullable=true)
+     * 
+     */
+    protected $website;
+    
+    /**
+     * @ORM\Column(type="string", length=50, unique=true, nullable=false)
+     * 
+     */
+    protected $contact_person;
+    
+    /**
+     * @ORM\Column(type="string", length=50, unique=true, nullable=false)
+     * 
+     */
+    protected $contact_number;
+    
+    /**
+     * @ORM\Column(type="string", length=50, unique=true, nullable=false)
+     * 
+     */
+    protected $community;
+    
     /**
      * @ORM\Column(type="smallint", nullable=false, options={"default" = 1});
      * 
@@ -202,6 +276,11 @@ class Company
         $this->name = isset($data['name']) ? $data['name'] : null;
         $this->status = isset($data['status']) ? $data['status'] : self::ACTIVE;
         $this->description = isset($data['description']) ? $data['description'] : null;
+        $this->email = isset($data['email']) ? $data['email'] : null;
+        $this->website = isset($data['website']) ? $data['website'] : null;
+        $this->contact_number = isset($data['contact_number']) ? $data['contact_number'] : null;
+        $this->contact_person = isset($data['contact_person']) ? $data['contact_person'] : null;
+        $this->community = isset($data['community']) ? $data['community'] : null;
     }
 
     public function getArrayCopy()

@@ -1,1 +1,34 @@
-signup
+<?php
+//$Form = $this->Form;
+//$Form->setAttribute('action', $this->url('opening_balance', array('action' => 'add', 'controller' => 'OpeningBalance')));
+//$Form->prepare();
+    echo $this->headTitle("Create New Accounts");
+    echo $this->form()->openTag($Form);
+    echo $this->formHidden($Form->get('id'));
+?>
+
+    <input type="button" value="Cancel" onclick="javascript:loadPage(urlOpeningBalance);" />
+    <input type="submit" value="Save" />
+<?php
+    echo $this->formRow($Form->get('name'));
+    echo (isset($this->errorMsgs['name'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['name']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('address'));
+    echo (isset($this->errorMsgs['address'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['address']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('email'));
+    echo (isset($this->errorMsgs['email'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['email']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('website'));
+    echo (isset($this->errorMsgs['website'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['website']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('contact_person'));
+    echo (isset($this->errorMsgs['contact_person'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['contact_person']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('contact_number'));
+    echo (isset($this->errorMsgs['contact_number'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['contact_number']) . '</span>' : '';
+    
+    echo $this->formRow($Form->get('community'));
+    echo (isset($this->errorMsgs['community'])) ? '<span class="errorMsgSpan">' . $this->translate($this->errorMsgs['community']) . '</span>' : '';
+
+?>

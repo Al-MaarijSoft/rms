@@ -21,7 +21,7 @@ use Zend\Http\Client;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
-
+use \Website\Form\SignUpForm;
 //use Zend\Http\Client\Adapter\Curl;
 
 class WebsiteController extends AbstractActionController
@@ -40,12 +40,26 @@ class WebsiteController extends AbstractActionController
     }
     
     public function signupAction(){
+        $Form = new SignUpForm();
         $Request = $this->getRequest();
         $ViewModel = new ViewModel();
+        $Company = new \Administration\Entity\Company();
         if ($Request->isXmlHttpRequest())
         {
             $ViewModel->setTerminal(true);
         }
+        $Form = new SignUpForm();
+        if ($Request->isPost())
+        {
+             $Form->setData($Request->getPost());
+             if ($Form->isValid())
+            {
+                 $Company->exchangeArray($Form->getData());
+                 $this->getServiceLocator()->get('EntityManager')->persist($Company);
+                 $this->getServiceLocator()->get('EntityManager')->flush();
+             }
+        }
+        $ViewModel->setVariable('Form', $Form);
         return $ViewModel;
     }
     
