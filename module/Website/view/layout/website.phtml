@@ -8,9 +8,9 @@
         <script type="text/javascript">
             //********************** START CONSTANTS
             //********************** END CONSTANTS
-            
+
             //********************** START VARIABLES
-//            var urlAboutUs = "<?php // echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website')) ?>";
+//            var urlAboutUs = "<?php // echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website'))     ?>";
             //********************** END VARIABLES
 
         </script>
@@ -55,78 +55,101 @@
         </div>
         <!-- ========================================= Start Top-Nav Menu and Top Container ====================================================== -->
         <div id="topBarContainer" class="navbar navbar-default navbar-static-top webTopContainer" role="navigation">
-                <div class="container">
-                    <div class="webLogoCss mT20" >&nbsp;</div>
-                    <div class="webRightVectorBg fR" >&nbsp;</div>
-                </div>
-                <div id="topNavContainer" class="container bgC-Dm">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <!--<a class="navbar-brand" href="#">Project name</a>-->
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navAjaxLink">
-                            <li class="active"><a href="<?php echo $this->url('website', array('action' => 'index', 'controller' => 'Website')) ?>">HOME</a></li>
-                            <li><a href="<?php echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website')) ?>">ABOUT US</a></li>
-                            <li><a href="<?php echo $this->url('website', array('action' => 'rmsFeature', 'controller' => 'Website')) ?>">RMS FEATURES</a></li>
-                            <li>
-                                <a href="#contact">CHECK A DEMO</a>
-                            </li>
-                            <li>
-                                <a href="#contact">CREATE NEW ACCOUNT</a>
-                            </li>
-<!--                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                </ul>
-                            </li>-->
-<!--                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>-->
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right mR5i">
-<!--                            <li><a href="../navbar/">Default</a></li>
-                            <li><a href="../navbar-static-top/">Static top</a></li>
-                            <li class="active"><a href="./">Fixed top</a></li>-->
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONTACT US<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGN IN<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
+            <div class="container">
+                <div class="webLogoCss mT20" >&nbsp;</div>
+                <div class="webRightVectorBg fR" >&nbsp;</div>
             </div>
+            <div id="topNavContainer" class="container bgC-Dm">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--<a class="navbar-brand" href="#">Project name</a>-->
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navAjaxLink">
+                        <li class="active"><a href="<?php echo $this->url('website', array('action' => 'index', 'controller' => 'Website')) ?>">HOME</a></li>
+                        <li><a href="<?php echo $this->url('website', array('action' => 'aboutUs', 'controller' => 'Website')) ?>">ABOUT US</a></li>
+                        <li><a href="<?php echo $this->url('website', array('action' => 'rmsFeature', 'controller' => 'Website')) ?>">RMS FEATURES</a></li>
+                        <li>
+                            <a href="#contact">CHECK A DEMO</a>
+                        </li>
+                        <li>
+                            <a href="#contact">CREATE NEW ACCOUNT</a>
+                        </li>
+                        <!--                            <li>
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Action</a></li>
+                                                            <li><a href="#">Another action</a></li>
+                                                            <li><a href="#">Something else here</a></li>
+                                                        </ul>
+                                                    </li>-->
+                        <!--                            <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Action</a></li>
+                                                            <li><a href="#">Another action</a></li>
+                                                            <li><a href="#">Something else here</a></li>
+                                                            <li class="divider"></li>
+                                                            <li class="dropdown-header">Nav header</li>
+                                                            <li><a href="#">Separated link</a></li>
+                                                            <li><a href="#">One more separated link</a></li>
+                                                        </ul>
+                                                    </li>-->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right mR5i">
+                        <!--                            <li><a href="../navbar/">Default</a></li>
+                                                    <li><a href="../navbar-static-top/">Static top</a></li>
+                                                    <li class="active"><a href="./">Fixed top</a></li>-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONTACT US<b class="caret"></b></a>
+                            <div class="dropdown-menu p15 bRd10">
+                                <!-- Login form here -->
+                                <div class="navbar-left navbar-input-group m10 b3S-W3 w275 h200 bRd10">
+                                    <div class="row pT5 pL20">
+                                        <h1 class="cP"><span class="glyphicon glyphicon-road cO"></span> Location</h1>
+                                        <span class="m5">4600 W. Loomis Road, Suite 310 Milwaukee, WI 53220 </span>
+                                        <div class="mT15"></div>
+                                        <h1 class="cP"><span class="glyphicon glyphicon-phone cO"></span> Phone</h1>
+                                        <span class="m5">+923014909125</span>
+                                        <div class="mT15"></div>
+                                        <h1 class="cP"><span class="glyphicon glyphicon-envelope cO"></span> Email</h1>
+                                        <span class="m5">info@almaarijsoft.com</span>
+                                    </div>
+                                    <div class="mT15"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGN IN<b class="caret"></b></a>
+                            <div class="dropdown-menu p15 bRd10">
+                                <!-- Login form here -->
+                                <div class="fL m10 b3S-W3 bRd10">
+                                    <form action="<?php echo $this->url('administration', array('action' => 'login', 'controller' => 'Administration'));?>" method="post" class="navbar-form navbar-left navbar-input-group" role="form">
+                                        <div class="form-group">
+                                            <label for="username" class="p0 cG1 fntW700" >Username</label>
+                                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="true" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="p0 cG1 fntW500">Password</label>
+                                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" />
+                                        </div>
+                                        <div class="mT15"></div>
+                                        <button type="submit" class="btn cW1 bgC-Gr1 btnOrngHover">Login</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
         <!-- ========================================= End Top-Nav Menu and Top Container ====================================================== -->
-        
+
         <!--<div id="containerDiv" class="container">-->
         <div id="containerDiv" class="container-fluid">
             <?php echo $this->content; ?>
@@ -157,27 +180,41 @@
                 loadPage(url);
         });
         //****************************Start Scroll Event For MenuBar Effect
-        jQuery(window).scroll(function (){
+        jQuery(window).scroll(function() {
             var topBarContainer = jQuery('#topBarContainer');
             var menuContainer = jQuery('#topNavContainer');
             var top = parseFloat(topBarContainer.height()) - 50;//
-           // what the y position of the scroll is
+            // what the y position of the scroll is
             var y = $(this).scrollTop();
-            console.log(y+ '=='+ top);
-            
+            console.log(y + '==' + top);
+
             // whether that's below the form
             if (y >= top) {
-              // if so, ad the fixed class
-              menuContainer.removeClass('container');
-              menuContainer.addClass('container-fluid');
-              menuContainer.addClass('navbar-fixed-top');
+                // if so, ad the fixed class
+                menuContainer.removeClass('container');
+                menuContainer.addClass('container-fluid');
+                menuContainer.addClass('navbar-fixed-top');
             } else {
-              // otherwise remove it
-              menuContainer.addClass('container');
-              menuContainer.removeClass('container-fluid');
-              menuContainer.removeClass('navbar-fixed-top');
-            } 
+                // otherwise remove it
+                menuContainer.addClass('container');
+                menuContainer.removeClass('container-fluid');
+                menuContainer.removeClass('navbar-fixed-top');
+            }
         });
         //****************************End Scroll Event For MenuBar Effect
+
+
+
+        //****************************Start Code for navbar form 
+        jQuery(function() {
+            // Setup drop down menu
+            jQuery('.dropdown-toggle').dropdown();
+
+            // Fix input element click problem
+            jQuery('.dropdown input, .dropdown label').click(function(e) {
+                e.stopPropagation();
+            });
+        });
+        //****************************End
     </script>
 </html>

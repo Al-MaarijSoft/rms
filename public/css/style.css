@@ -1,9 +1,15 @@
 body {
     /*    padding-top: 60px;
         padding-bottom: 40px;*/
-    font-size: 12px;
-    font-weight: bold;
-    font-family: arial;
+    font-size: 11px;
+    font-weight: 600;
+    /*font-family: Georgia, Serif, Helvetica;*/
+    /*font-family: "Lucida" Grande, sans-serif;*/
+    font-family: Verdana,Serif;
+    /*font-family: "Trebuchet MS", Helvetica, sans-serif;*/
+    /*font-family: 'Segoe UI Reg';*/
+    /*font-variant: small-caps;*/
+    font-stretch: normal;
 }
 .loadingDivCss{
     padding-top:200px;
@@ -22,7 +28,7 @@ img{
 }
 h1{
     font-size: 18px;
-    margin:  0 0 10px 10px;
+    /*margin:  0 0 10px 10px;*/
 }
 /*button{
     height: 30px;
@@ -1476,6 +1482,10 @@ div.newsContainers ul.news li{
 div.newsContainers ul.news li ul li{
     margin: 5px 0 5px 15px;
 }
+.btnOrngHover:hover{
+    background: #F95507;
+    color: #fff;
+}
 /* ================== End WebSite Home ======================= */
 
 /* ================== Start WebSite-Layout ======================= */
@@ -1499,6 +1509,9 @@ div.newsContainers ul.news li ul li{
 
 /* ======== Font Bolds and  Sizes =========*/
 .fntB{font-weight: bold;}
+.fntW700{font-weight: 700;}
+.fntW600{font-weight: 600;}
+.fntW500{font-weight: 500;}
 .fntS13{font-size: 13px;}
 .fntS15{font-size: 15px;}
 
@@ -1519,7 +1532,12 @@ div.newsContainers ul.news li ul li{
 .cSC{color: #0b2073;}
 .cP{color: #8147a0;}
 .cG1{color: #708090;}
+.cG2{color: #999;}
+.cG3{color: #666;}
+.cG4{color: #333;}
 .cGr1{color: #478409;}
+
+.cO{color: #F95507;}
 
 .cW0{color: #fff;}
 .cW1{color: #F9F9F9;}
@@ -1539,10 +1557,13 @@ div.newsContainers ul.news li ul li{
 .bgC-W3{background-color: #E7E7E7;}
 .bgC-W5{background-color: #C2C2C2;}
 
+.bgC-Gr1{background-color: #478409;}
+
 /* ======== Borders =========*/
 .no-b{border: 1px solid #2b073e;}
 
 .bRd4{border-radius: 4px}
+.bRd10{border-radius: 10px}
 
 .b1S-Dm{border: 1px solid #2b073e;}
 
@@ -1550,7 +1571,11 @@ div.newsContainers ul.news li ul li{
 
 .b3S-Gr1{border: 3px solid #478409;}
 
+.b3S-G1{border: 3px solid #708090;}
+
 /* ======== Paddings =========*/
+.p0{padding: 0px;}
+.p0i{padding: 0px !important;}
 .p15{padding: 15px;}
 .p20{padding: 20px;}
 
@@ -1603,9 +1628,13 @@ div.newsContainers ul.news li ul li{
 
 .w141{width: 141px;}
 .w165{width: 165px;}
+.w265{width: 265px;}
+.w275{width: 275px;}
 
 /* ======== Heights =========*/
 .h50{height: 50px;}
 .h84{height: 84px;}
 .h115{height: 115px;}
+.h150{height: 150px;}
+.h200{height: 200px;}
 /* ================== End GENERAL ======================= */
